@@ -19,99 +19,9 @@
         height: 100vh;
       }
 
-      /* ── Sidebar ── */
-      .sidebar {
-        width: 220px;
-        flex-shrink: 0;
-        background: #fff;
-        border-right: 1px solid #e8e8e8;
-        display: flex;
-        flex-direction: column;
-        padding: 28px 16px 20px;
-        gap: 6px;
-        overflow-y: auto;
+      #sidebar-container {
+        display: contents;
       }
-
-      .profile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding-bottom: 20px;
-        margin-bottom: 8px;
-        border-bottom: 1px solid #eee;
-      }
-
-      .avatar {
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 12px;
-      }
-
-      .profile h1 {
-        font-size: 0.85rem;
-        font-weight: 700;
-        line-height: 1.3;
-      }
-
-      .profile p {
-        font-size: 0.73rem;
-        color: #888;
-        margin-top: 3px;
-        line-height: 1.4;
-      }
-
-      .section-label {
-        font-size: 0.68rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #aaa;
-        padding: 10px 8px 4px;
-      }
-
-      .nav-btn {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        padding: 9px 10px;
-        border-radius: 7px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        cursor: pointer;
-        border: none;
-        background: transparent;
-        color: #444;
-        text-align: left;
-        width: 100%;
-        transition: background 0.12s, color 0.12s;
-        text-decoration: none;
-      }
-
-      .nav-btn:hover { background: #f0f0f0; color: #1a1a1a; }
-
-      .nav-btn.active {
-        background: #1a1a1a;
-        color: #fff;
-      }
-
-      .nav-btn .icon { font-size: 1rem; flex-shrink: 0; }
-
-      .spacer { flex: 1; }
-
-      .footer {
-        font-size: 0.7rem;
-        color: #ccc;
-        text-align: center;
-        padding-top: 12px;
-        border-top: 1px solid #eee;
-        line-height: 1.5;
-      }
-
-      .footer a { color: #bbb; text-decoration: underline; }
-      .footer a:hover { color: #888; }
 
       /* ── Content ── */
       .content {
@@ -134,54 +44,39 @@
   </head>
   <body>
     <div class="layout">
-      <aside class="sidebar">
-        <div class="profile">
-          <img class="avatar" src="https://avatars.githubusercontent.com/u/156056911?v=4" alt="Boonyakorn Tanrattanakorn" />
-          <h1>Boonyakorn Tanrattanakorn</h1>
-          <p>Computer Engineering<br>Chulalongkorn University</p>
-        </div>
+      <div id="sidebar-container"></div>
 
-        <span class="section-label">View</span>
-        <button class="nav-btn active" id="btn-html" onclick="show('html')">
-          <span class="icon">📄</span> CV (HTML)
-        </button>
-        <button class="nav-btn" id="btn-pdf" onclick="show('pdf')">
-          <span class="icon">📋</span> CV (PDF)
-        </button>
-
-        <div class="spacer"></div>
-
-        <div class="footer">
-          Generated with<br>
-          <a href="https://github.com/rendercv/rendercv" target="_blank" rel="noopener">RenderCV</a>
-        </div>
-      </aside>
-
-      <main class="content">
-        <iframe id="frame-html" class="active" src="CV/Boonyakorn_Tanrattanakorn_CV.html" title="CV HTML"></iframe>
-        <iframe id="frame-pdf" src="CV/Boonyakorn_Tanrattanakorn_CV.pdf" title="CV PDF"></iframe>
+      <main class="content" id="content-area">
       </main>
     </div>
 
     <script>
-      function show(type) {
-        const htmlFrame = document.getElementById('frame-html');
-        const pdfFrame  = document.getElementById('frame-pdf');
-        const btnHtml   = document.getElementById('btn-html');
-        const btnPdf    = document.getElementById('btn-pdf');
+      fetch('sidebar.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('sidebar-container').innerHTML = html;
 
-        if (type === 'html') {
-          htmlFrame.classList.add('active');
-          pdfFrame.classList.remove('active');
-          btnHtml.classList.add('active');
-          btnPdf.classList.remove('active');
-        } else {
-          pdfFrame.classList.add('active');
-          htmlFrame.classList.remove('active');
-          btnPdf.classList.add('active');
-          btnHtml.classList.remove('active');
-        }
-      }
+          const content = document.getElementById('content-area');
+          const buttons = document.querySelectorAll('[data-src]');
+
+          // Create an iframe for each data-src button
+          buttons.forEach((btn, i) => {
+            const frame = document.createElement('iframe');
+            frame.src = btn.dataset.src;
+            frame.title = btn.textContent.trim();
+            frame.dataset.frame = i;
+            if (i === 0) frame.classList.add('active');
+            content.appendChild(frame);
+
+            // Generic click handler
+            btn.addEventListener('click', () => {
+              document.querySelectorAll('#content-area iframe').forEach(f => f.classList.remove('active'));
+              document.querySelectorAll('[data-src]').forEach(b => b.classList.remove('active'));
+              frame.classList.add('active');
+              btn.classList.add('active');
+            });
+          });
+        });
     </script>
   </body>
 </html>

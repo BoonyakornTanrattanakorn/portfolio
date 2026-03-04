@@ -7,6 +7,7 @@ on:
     paths:
       - 'CV/**'
       - 'index.html'
+      - 'sidebar.html'
   workflow_dispatch:
 
 permissions:
@@ -32,6 +33,7 @@ jobs:
         run: |
           mkdir -p _site/CV
           cp index.html _site/index.html
+          cp sidebar.html _site/sidebar.html
           find CV -name "*.html" -exec cp {} _site/CV/Boonyakorn_Tanrattanakorn_CV.html \;
           find CV -name "*.pdf" -exec cp {} _site/CV/Boonyakorn_Tanrattanakorn_CV.pdf \;
 
