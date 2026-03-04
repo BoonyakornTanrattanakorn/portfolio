@@ -1,0 +1,1 @@
+create venv and pip install "rendercv(full)" to use
