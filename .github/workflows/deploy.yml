@@ -32,12 +32,12 @@ jobs:
 
       - name: Prepare output directory
         run: |
-          mkdir -p _site/CV
+          mkdir -p _site/CV _site/portfolio
           cp index.html _site/index.html
           cp sidebar.html _site/sidebar.html
-          cp portfolio/portfolio.html _site/portfolio/portfolio.html
+          cp portfolio/portfolio.html _site/portfolio/portfolio.html || true
           find CV -name "*.html" -exec cp {} _site/CV/Boonyakorn_Tanrattanakorn_CV.html \;
-          find CV -name "*.pdf" -exec cp {} _site/CV/Boonyakorn_Tanrattanakorn_CV.pdf \;
+          find CV -name "*.pdf" -exec cp {} _site/CV/Boonyakorn_Tanrattanakorn_CV.pdf \; || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
