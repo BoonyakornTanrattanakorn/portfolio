@@ -50,6 +50,14 @@ cv:
         highlights:
           - Built a real-time 2D fluid dynamics simulator in **Godot Engine** using the SPH computational method written in **GDScript**.
           - Implemented GPU-accelerated physics calculations with **GLSL compute shaders** for density and pressure force computations.
+      - name: Weather Station
+        date: '2025'
+        summary: 'Embedded System Lab I (2110366), Chulalongkorn University | Embedded System Programmer'
+        highlights:
+          - Developed **STM32** firmware in **C** to interface with DHT11 temperature/humidity, LDR light, and water level sensors via ADC and a custom one-wire protocol.
+          - Designed a compact binary UART data packet protocol for STM32–**ESP32-S3** communication with checksum validation.
+          - Implemented **ESP32-S3** firmware to publish sensor data to a cloud **MQTT** broker (Eclipse Mosquitto) and control a servo motor rain gauge reset via **PWM**.
+          - Full-stack IoT pipeline: **Go** + Fiber backend with PostgreSQL storage, and a **SvelteKit** + **Three.js** real-time dashboard with 3D scene and live charts.
     technical_skills:
       - label: Embedded Systems
         details: Integrated Circuits, SMT, PCB Design & Assembly, STM32 & ESP32 Programming, FPGA Programming
