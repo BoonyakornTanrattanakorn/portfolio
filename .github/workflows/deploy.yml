@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '**.yaml'
+      - 'CV/**'
   workflow_dispatch:
 
 permissions:
@@ -27,26 +27,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
-      - name: Install RenderCV
-        run: pip install "rendercv[full]"
-
-      - name: Render CV
-        run: rendercv render "Boonyakorn_Tanrattanakorn_CV.yaml" 2>&1
-
-      - name: List render output
-        run: find rendercv_output -type f || echo "rendercv_output directory not found"
-
       - name: Prepare output directory
         run: |
           mkdir -p _site
-          find rendercv_output -name "*.html" -exec cp {} _site/index.html \;
-          find rendercv_output -name "*.pdf" -exec cp {} _site/Boonyakorn_Tanrattanakorn_CV.pdf \; || true
-          find rendercv_output -name "*.png" -exec cp {} _site/ \; || true
+          find CV -name "*.html" -exec cp {} _site/index.html \;
+          find CV -name "*.pdf" -exec cp {} _site/Boonyakorn_Tanrattanakorn_CV.pdf \;
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
