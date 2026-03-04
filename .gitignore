@@ -1,1 +1,4 @@
 /.venv
+*.md
+*.typ
+!README.md
