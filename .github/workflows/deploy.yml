@@ -33,7 +33,7 @@ jobs:
           python-version: '3.13'
 
       - name: Install RenderCV
-        run: pip install rendercv[full]
+        run: pip install "rendercv[full]"
 
       - name: Render CV
         run: rendercv render "Boonyakorn_Tanrattanakorn_CV.yaml"
