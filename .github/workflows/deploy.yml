@@ -31,7 +31,12 @@ jobs:
       - name: Prepare output directory
         run: |
           mkdir -p _site
-          cp index.html _site/index.html
+          if [ -f index.html ]; then
+            cp index.html _site/index.html
+          else
+            echo "WARNING: index.html not found in repo root, falling back to CV html"
+            find CV -name "*.html" -exec cp {} _site/index.html \;
+          fi
           find CV -name "*.html" -exec cp {} _site/cv.html \;
           find CV -name "*.pdf" -exec cp {} _site/Boonyakorn_Tanrattanakorn_CV.pdf \;
 
