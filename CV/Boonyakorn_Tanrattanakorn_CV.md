@@ -6,13 +6,7 @@
 
 
 # Education
-## **Chulalongkorn University**, Computer Engineering
-
-**BE**
-
-Bangkok, Thailand
-
-Sept 2023 – present
+## **Chulalongkorn University**, BE in Computer Engineering -- Bangkok, ThailandSept 2023 – present
 
 - GPA: 3.91/4.00
 

@@ -1,8 +1,8 @@
-# Boonyakorn Tanrattanakorn — CV
+# Boonyakorn Tanrattanakorn — Portfolio
 
 My personal CV written in YAML and rendered to PDF/HTML using [RenderCV](https://github.com/rendercv/rendercv).
 
-**Live CV:** [https://boonyakorntanrattanakorn.github.io/CV/](https://boonyakorntanrattanakorn.github.io/CV/)
+**Live Portfolio:** [boonyakorntanrattanakorn.github.io/portfolio](https://boonyakorntanrattanakorn.github.io/portfolio/)
 
 ---
 
@@ -31,24 +31,21 @@ pip install "rendercv[full]"
 ### Render locally
 
 ```bash
-rendercv render Boonyakorn_Tanrattanakorn_CV.yaml
+rendercv render CV.yaml
 ```
 
-Output files are written to `rendercv_output/`:
+Output files are written to `CV/`:
 
 | File | Description |
 |------|-------------|
 | `*.pdf` | Print-ready PDF |
 | `*.html` | Standalone HTML (used for GitHub Pages) |
-| `*.typ` | Typst source |
-| `*.md` | Markdown version |
-| `*.png` | Page preview image(s) |
 
 ---
 
 ## Editing the CV
 
-All content lives in [`Boonyakorn_Tanrattanakorn_CV.yaml`](Boonyakorn_Tanrattanakorn_CV.yaml).
+All content lives in [`CV.yaml`](CV.yaml).
 
 The file has three top-level keys:
 
@@ -69,22 +66,28 @@ Pushing to `main` automatically renders the CV and deploys it via the workflow a
 ### How it works
 
 ```
-push to main
+Edit CV.yaml
+    │
+    ▼
+rendercv render CV.yaml  (run locally)
+    │
+    ▼
+CV/
+  ├── Boonyakorn_Tanrattanakorn_CV.html
+  └── Boonyakorn_Tanrattanakorn_CV.pdf
+    │
+    ▼
+git push to main
     │
     ▼
 actions/checkout
     │
     ▼
-pip install "rendercv[full]"
-    │
-    ▼
-rendercv render *.yaml  →  rendercv_output/
-    │
-    ▼
 _site/
-  ├── index.html          ← CV page (renamed from rendercv_output/*.html)
-  ├── Boonyakorn_Tanrattanakorn_CV.pdf
-  └── *.png               ← preview images
+  ├── index.html                        ← sidebar navigation
+  └── CV/
+      ├── Boonyakorn_Tanrattanakorn_CV.html
+      └── Boonyakorn_Tanrattanakorn_CV.pdf
     │
     ▼
 actions/deploy-pages  →  GitHub Pages

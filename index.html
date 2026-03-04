@@ -46,15 +46,8 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: #1a1a1a;
-        color: #fff;
-        font-size: 20px;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        object-fit: cover;
         margin-bottom: 12px;
-        letter-spacing: -0.5px;
       }
 
       .profile h1 {
@@ -143,7 +136,7 @@
     <div class="layout">
       <aside class="sidebar">
         <div class="profile">
-          <div class="avatar">BT</div>
+          <img class="avatar" src="https://avatars.githubusercontent.com/u/156056911?v=4" alt="Boonyakorn Tanrattanakorn" />
           <h1>Boonyakorn Tanrattanakorn</h1>
           <p>Computer Engineering<br>Chulalongkorn University</p>
         </div>
@@ -155,11 +148,6 @@
         <button class="nav-btn" id="btn-pdf" onclick="show('pdf')">
           <span class="icon">📋</span> CV (PDF)
         </button>
-
-        <span class="section-label">Download</span>
-        <a class="nav-btn" href="CV/Boonyakorn_Tanrattanakorn_CV.pdf" download>
-          <span class="icon">⬇️</span> Download PDF
-        </a>
 
         <div class="spacer"></div>
 

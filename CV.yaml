@@ -67,7 +67,7 @@ cv:
       - label: Languages
         details: 'Thai: Native, English: IELTS 7.5, Japanese: JLPT N4'
 design:
-  theme: classic
+  theme: engineeringresumes
 locale:
   language: english
 settings:
