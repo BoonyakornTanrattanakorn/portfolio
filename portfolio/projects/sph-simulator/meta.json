@@ -1,0 +1,9 @@
+{
+  "title": "Smoothed Particle Hydrodynamics Simulator",
+  "role": "Simulation & Graphics Developer",
+  "date": "2025",
+  "organization": "Personal Project",
+  "tags": ["Godot", "GLSL", "GDScript", "Simulation"],
+  "thumbnail": "",
+  "summary": "Real-time 2D fluid simulator in Godot using SPH; GPU-accelerated density and pressure computation via GLSL compute shaders."
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Weather Station — Embedded System Lab",
+  "role": "Full-Stack Embedded Developer",
+  "date": "2025",
+  "organization": "Chulalongkorn University",
+  "tags": ["STM32", "ESP32", "MQTT", "Go", "SvelteKit"],
+  "thumbnail": "",
+  "summary": "STM32 + ESP32-S3 system publishing sensor data to MQTT, backend (Go + Fiber), and SvelteKit dashboard with real-time visuals."
+}
