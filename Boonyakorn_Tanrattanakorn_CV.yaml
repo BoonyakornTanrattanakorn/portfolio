@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.6/schema.json
+cv:
+  name: Boonyakorn Tanrattanakorn
+  location: Nonthaburi, Thailand
+  email: boonyakorn.tan@gmail.com
+  phone: tel:+66-89-926-2211
+  sections:
+    education:
+      - institution: Chulalongkorn University
+        area: Computer Engineering
+        degree: BE
+        start_date: 2023-09
+        end_date: present
+        location: Bangkok, Thailand
+        highlights:
+          - 'GPA: 3.91/4.00'
+          - '**Relevant Coursework**: Introduction to Robotics (A), Hardware Synthesis Lab (A), Embedded System Laboratory (A), Data Structures (A), Algorithm Design (A), Software Engineering (A)'
+    projects:
+      - name: Project CURSR-III
+        date: '2023'
+        summary: Chulalongkorn University High Altitude Research Club | Avionics Engineer
+        highlights:
+          - Designed and developed a telemetry ground station using **ESP32** and **LoRa**.
+          - Designed and assembled 2-layer throughhole **PCB** for ground station using **KiCad**.
+          - Participated in the fly-off team at the **Spaceport America Cup 2024** in USA.
+      - name: Project CURSR-IV
+        date: '2024'
+        summary: Chulalongkorn University High Altitude Research Club | Avionics Engineer
+        highlights:
+          - Designed and assembled a 4-layer SMT flight computer **PCB** using **KiCad**.
+          - Developed embedded firmware on **STM32 (C/C++)** for sensor integration, telemetry, and flight control.
+          - Built a **LoRa**-based mesh network ground station using **ESP32** and MQTT for telemetry diversity.
+          - Modeled and simulated an active airbrake control system in **Simulink**.
+          - Participated in the fly-off team at the **International Rocket Engineering Competition 2025** in USA.
+      - name: Project XSRT
+        date: '2025'
+        summary: Chulalongkorn University High Altitude Research Club | Electrical Engineer
+        highlights:
+          - Developed an R&D web application using **Next.js** and **Tailwind CSS** for a hybrid propulsion test bench user interface.
+          - Deployed **Flask** backend on **Raspberry Pi 5** to control the test bench.
+      - name: FPGA Real-Time Video Player
+        date: '2025'
+        summary: Academic Project | Verilog
+        highlights:
+          - Implemented a real-time FPGA (Basys-3) video player in **Verilog** with VGA output.
+          - Developed an SPI-based SD card controller to stream 320x240 RGB frames into dual-port RAM.
+      - name: Smoothed Particle Hydrodynamics Simulator
+        date: '2025'
+        summary: Personal Project | Godot
+        highlights:
+          - Built a real-time 2D fluid dynamics simulator in **Godot Engine** using the SPH computational method written in **GDScript**.
+          - Implemented GPU-accelerated physics calculations with **GLSL compute shaders** for density and pressure force computations.
+    technical_skills:
+      - label: Embedded Systems
+        details: Integrated Circuits, SMT, PCB Design & Assembly, STM32 & ESP32 Programming, FPGA Programming
+      - label: Programming
+        details: Python, C, C#, C++, Java, Verilog
+      - label: CAD
+        details: Fusion 360, KiCad
+      - label: Languages
+        details: 'Thai: Native, English: IELTS 7.5, Japanese: JLPT N4'
+design:
+  theme: classic
+locale:
+  language: english
+settings:
+  current_date: '2026-03-04'
+  render_command:
+    typst_path: rendercv_output\NAME_IN_SNAKE_CASE_CV.typ
+    pdf_path: rendercv_output\NAME_IN_SNAKE_CASE_CV.pdf
+    markdown_path: rendercv_output\NAME_IN_SNAKE_CASE_CV.md
+    html_path: rendercv_output\NAME_IN_SNAKE_CASE_CV.html
+    png_path: rendercv_output\NAME_IN_SNAKE_CASE_CV.png
