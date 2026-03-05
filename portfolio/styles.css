@@ -44,7 +44,7 @@ h1 { font-size: 1.5rem; margin: 16px 0 4px }
 header { display: flex; align-items: center; gap: 16px }
 .avatar { width: 64px; height: 64px; border-radius: 8px; object-fit: cover }
 .lead { margin: 6px 0 0; color: var(--muted) }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 22px }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, 320px); gap: 16px; margin-top: 22px; justify-content: center }
 .card { background: var(--card); border-radius: 10px; overflow: hidden; box-shadow: 0 6px 18px rgba(18,18,18,.06); display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: transform 200ms ease, box-shadow 200ms ease; will-change: transform }
 .card-thumb { width: 100%; height: 140px; object-fit: cover; background: #e2e4e8; display: block }
 .card-thumb-placeholder { width: 100%; height: 140px; background: #e2e4e8; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.8rem }
@@ -61,7 +61,20 @@ header { display: flex; align-items: center; gap: 16px }
 .error-msg { color: #c0392b; margin-top: 24px; font-size: 0.9rem }
 footer { margin-top: 28px; color: var(--muted); font-size: 0.9rem }
 @media (max-width: 520px) { .wrap { padding: 12px } header { gap: 12px } .avatar { width: 56px; height: 56px } }
+@media (max-width: 360px) {
+	.grid { grid-template-columns: 1fr }
+	.card { width: auto }
+}
 /* Video/demo styles */
+/* Controls: search, sort, tag filters */
+.controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px }
+.controls input[type="search"] { flex: 1 1 220px; padding: 8px 12px; border-radius: 8px; border: 1px solid #e6e6e9; background: white; box-shadow: inset 0 1px 0 rgba(0,0,0,0.02) }
+.controls select { padding: 8px 10px; border-radius: 8px; border: 1px solid #e6e6e9; background: white }
+.tag-filter { margin-left: 6px; padding: 6px 10px; border-radius: 999px; border: 1px solid #e6e6e9; background: #fafafa; color: #333; cursor: pointer; font-size: 0.85rem }
+.tag-filter:hover { background: #f3f3f5 }
+.tag-filter.active { background: #111; color: #fff; border-color: #111 }
+.controls label { color: var(--muted); font-size: 0.9rem }
+
 .video-wrapper { position: relative; padding-top: 75%; margin-bottom: 18px }
 .video-wrapper iframe, .video-wrapper video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 8px; background: #000 }
 .demo-note { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px }

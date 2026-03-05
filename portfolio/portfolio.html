@@ -20,6 +20,20 @@
         <p>Selected projects and highlights. Click a card to read more.</p>
       </section>
 
+      <section style="margin-top:12px" class="controls">
+        <input id="search" type="search" placeholder="Search projects (title, summary, tags)" aria-label="Search projects" />
+
+        <label for="sort" style="margin-left:8px">Sort:</label>
+        <select id="sort" aria-label="Sort projects">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="az">Title A–Z</option>
+          <option value="za">Title Z–A</option>
+        </select>
+
+        <div id="tag-filters" style="display:inline-block;margin-left:12px"></div>
+      </section>
+
       <section class="grid" id="project-grid">
         <p class="loading">Loading projects…</p>
       </section>
@@ -32,14 +46,16 @@
 
     <script>
       /**
-       * Loads the project manifest (projects.json) then fetches each project's
-       * meta.json and renders a card.  No framework, no build step required.
-       *
-       * NOTE: Requires a web server (e.g. `npx serve .` or GitHub Pages).
-       *       Opening directly via file:// will be blocked by CORS.
+       * Project loader + search / sort / filter UI
        */
 
       const grid = document.getElementById('project-grid');
+      const searchInput = document.getElementById('search');
+      const sortSelect = document.getElementById('sort');
+      const tagFilters = document.getElementById('tag-filters');
+
+      let projects = [];
+      let selectedTags = new Set();
 
       function renderCard(id, meta) {
         const card = document.createElement('a');
@@ -47,7 +63,6 @@
         card.href = `projects/${id}/index.html`;
         card.setAttribute('aria-label', meta.title || id);
 
-        // Thumbnail: create an <img> and add an onerror fallback to show placeholder
         if (meta.thumbnail) {
           const img = document.createElement('img');
           img.className = 'card-thumb';
@@ -68,7 +83,6 @@
           card.appendChild(ph);
         }
 
-        // Card body
         const body = document.createElement('div');
         body.className = 'card-body';
 
@@ -99,6 +113,91 @@
         return card;
       }
 
+      function normalize(s){ return String(s || '').toLowerCase(); }
+
+      function parseDateValue(d) {
+        if (!d) return 0;
+        // try parsing ISO or year-month; fallback to numeric year
+        const parsed = Date.parse(d);
+        if (!Number.isNaN(parsed)) return parsed;
+        const year = parseInt(d, 10);
+        if (!Number.isNaN(year)) return new Date(year,0,1).getTime();
+        return 0;
+      }
+
+      function getAllTags(items){
+        const set = new Set();
+        items.forEach(p => (p.meta.tags || []).forEach(t => set.add(t)));
+        return Array.from(set).sort((a,b)=>a.localeCompare(b));
+      }
+
+      function createTagFilters(tags){
+        tagFilters.innerHTML = '';
+        if (!tags.length) return;
+        tags.forEach(t => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'tag-filter';
+          btn.textContent = t;
+          btn.dataset.tag = t;
+          btn.addEventListener('click', () => {
+            if (selectedTags.has(t)) selectedTags.delete(t); else selectedTags.add(t);
+            btn.classList.toggle('active');
+            renderProjects();
+          });
+          tagFilters.appendChild(btn);
+        });
+      }
+
+      function matchesQuery(p, q){
+        if (!q) return true;
+        q = normalize(q);
+        if (normalize(p.meta.title).includes(q)) return true;
+        if (normalize(p.meta.summary).includes(q)) return true;
+        if (normalize(p.meta.organization).includes(q)) return true;
+        if (normalize(p.meta.role).includes(q)) return true;
+        for (const t of (p.meta.tags||[])) if (normalize(t).includes(q)) return true;
+        return false;
+      }
+
+      function renderProjects(){
+        const q = searchInput.value.trim();
+        const sort = sortSelect.value;
+
+        const filtered = projects.filter(p => {
+          if (p.error) return false;
+          if (!matchesQuery(p, q)) return false;
+          if (selectedTags.size > 0) {
+            const tags = p.meta.tags || [];
+            const has = Array.from(selectedTags).some(t => tags.indexOf(t) !== -1);
+            if (!has) return false;
+          }
+          return true;
+        });
+
+        filtered.sort((a,b) => {
+          if (sort === 'az') return (a.meta.title||'').localeCompare(b.meta.title||'');
+          if (sort === 'za') return (b.meta.title||'').localeCompare(a.meta.title||'');
+          const da = parseDateValue(a.meta.date);
+          const db = parseDateValue(b.meta.date);
+          return sort === 'oldest' ? da - db : db - da;
+        });
+
+        grid.innerHTML = '';
+        if (!filtered.length) {
+          grid.innerHTML = `<p class="loading">No projects found.</p>`;
+          return;
+        }
+
+        filtered.forEach(p => grid.appendChild(renderCard(p.id, p.meta)));
+      }
+
+      // simple debounce
+      function debounce(fn, ms=200){
+        let t;
+        return (...args) => { clearTimeout(t); t = setTimeout(()=>fn(...args), ms); };
+      }
+
       async function loadProjects() {
         try {
           const manifestRes = await fetch('projects.json');
@@ -114,21 +213,34 @@
             )
           );
 
-          grid.innerHTML = '';
-          for (const { id, meta, error } of metas) {
-            if (error) {
+          projects = metas;
+
+          // show errors (separate) and still allow filtering of successful ones
+          const errors = projects.filter(p => p.error);
+          if (errors.length) {
+            const errFrag = document.createDocumentFragment();
+            errors.forEach(e => {
               const el = document.createElement('p');
               el.className = 'error-msg';
-              el.textContent = `Could not load "${id}": ${error}`;
-              grid.appendChild(el);
-            } else {
-              grid.appendChild(renderCard(id, meta));
-            }
+              el.textContent = `Could not load "${e.id}": ${e.error}`;
+              errFrag.appendChild(el);
+            });
+            grid.innerHTML = '';
+            grid.appendChild(errFrag);
           }
+
+          const tags = getAllTags(projects.filter(p => !p.error));
+          createTagFilters(tags);
+
+          renderProjects();
         } catch (err) {
           grid.innerHTML = `<p class="error-msg">Failed to load projects: ${err.message}</p>`;
         }
       }
+
+      // wire events
+      searchInput.addEventListener('input', debounce(renderProjects, 180));
+      sortSelect.addEventListener('change', renderProjects);
 
       loadProjects();
     </script>
