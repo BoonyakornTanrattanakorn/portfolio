@@ -3,67 +3,83 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>FPGA Real-Time Video Player</title>
-    <style>
-      :root { --bg: #f7f7f8; --card: #fff; --muted: #6b6b6b; --accent: #1a1a1a }
-      html, body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial; background: var(--bg); color: #111 }
-      .wrap { max-width: 760px; margin: 32px auto; padding: 24px }
-      a.back { color: var(--muted); text-decoration: none; font-size: 0.9rem }
-      a.back:hover { text-decoration: underline }
-      h1 { font-size: 1.5rem; margin: 16px 0 4px }
-      .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px }
-      .tags { margin-bottom: 20px }
-      .tag { display: inline-block; background: #f0f0f0; color: #333; padding: 4px 8px; border-radius: 999px; font-size: 0.78rem; margin-right: 6px }
-      .thumbnail { width: 100%; max-height: 360px; object-fit: cover; border-radius: 10px; margin-bottom: 24px; background: #e8e8e8 }
-      .thumbnail-placeholder { width: 100%; height: 220px; border-radius: 10px; background: #e2e4e8; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 24px }
-      .body { line-height: 1.7 }
-      .body h2 { font-size: 1.1rem; margin-top: 28px }
-      .body p { margin: 0 0 12px }
-      .body ul { padding-left: 20px }
-      .body li { margin-bottom: 6px }
-      pre { background: #1e1e2e; color: #cdd6f4; border-radius: 8px; padding: 14px 16px; font-size: 0.82rem; overflow-x: auto }
-    </style>
+    <title>FPGA Image Display System — Basys 3</title>
+    <link rel="stylesheet" href="../../styles.css">
   </head>
   <body>
     <div class="wrap">
       <a class="back" href="../../portfolio.html">← Back to Portfolio</a>
 
-      <h1>FPGA Real-Time Video Player</h1>
-      <div class="meta">
-        2025 &nbsp;·&nbsp; Academic Project &nbsp;·&nbsp; Role: FPGA &amp; RTL Developer
-      </div>
+      <h1>FPGA Image Display System — Basys 3 (Final Project)</h1>
+      <div class="meta">2024 &nbsp;·&nbsp; Academic Project &nbsp;·&nbsp; Role: FPGA &amp; RTL Developer</div>
       <div class="tags">
         <span class="tag">Verilog</span>
         <span class="tag">VGA</span>
         <span class="tag">FPGA</span>
         <span class="tag">SPI</span>
+        <span class="tag">Basys 3</span>
+        <span class="tag">Xilinx Vivado</span>
       </div>
 
-      <!-- Replace with <img class="thumbnail" src="thumbnail.jpg" alt="Demo screenshot"> when available -->
       <div class="thumbnail-placeholder">No thumbnail yet</div>
 
-      <!-- ── Project body — customize freely below ── -->
       <div class="body">
         <h2>Overview</h2>
         <p>
-          A fully hardware video playback pipeline on a Digilent Basys-3 (Artix-7) FPGA written entirely in Verilog.
-          Raw 320×240 RGB565 frames are stored on a FAT-formatted SD card and streamed in real time to a VGA monitor
-          at a target frame rate of 24 fps.
+          Implemented an end-to-end FPGA image display system on the Digilent Basys 3 (Xilinx Artix-7).
+          The design reads raw 320×240 frames from a microSD card via SPI and renders them on a VGA monitor in real time.
+          All RTL is written in synthesizable Verilog and built with Xilinx Vivado.
         </p>
 
-        <h2>Architecture</h2>
+        <h2>Demo</h2>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/p0MyfT0LiCs" title="FPGA Video Demo" allowfullscreen></iframe>
+        </div>
+        <p class="demo-note">Final project for 2110363 Hardware Synthesis Lab I, Chulalongkorn University. Video frames are 320×240 pixels at 12-bit colour stored as raw frames on the SD card and read over SPI (50 MHz). Output is driven over VGA; recorded playback was slightly sped up to match the original music video.</p>
+        <p>Watch on YouTube: <a href="https://www.youtube.com/watch?v=p0MyfT0LiCs" target="_blank" rel="noopener">https://www.youtube.com/watch?v=p0MyfT0LiCs</a></p>
+
+        <h2>Key Features</h2>
         <ul>
-          <li><strong>SPI SD Controller</strong> — bit-bang / FIFO-backed module reading 512-byte blocks at 25 MHz</li>
-          <li><strong>FAT16 parser</strong> — minimal state machine to locate and walk cluster chains</li>
-          <li><strong>Dual-port BRAM ping-pong</strong> — one bank fills while the other feeds the VGA serializer</li>
-          <li><strong>VGA timing generator</strong> — 640×480 @ 60 Hz (pixels 2× scaled, centred)</li>
+          <li><strong>MicroSD Interface</strong> — SPI-based SD master controller (sd_master.v) for block-level reads.</li>
+          <li><strong>VGA Signal Generation</strong> — Custom VGA sync module producing H-sync, V-sync and blanking intervals.</li>
+          <li><strong>Image Rendering</strong> — 320×240 pixel pipeline from SD block reads to pixel output.</li>
+          <li><strong>Image Switching</strong> — Hardware button to switch between stored images on the SD card.</li>
+          <li><strong>Top-Level Integration</strong> — Modular top module (TopModule.v) that ties Feeder, Controller, VGA, and SD subsystems together.</li>
         </ul>
 
-        <h2>Key Challenge</h2>
-        <p>
-          Sustaining the SD read bandwidth above 2.4 MB/s while keeping the VGA pixel clock uninterrupted required
-          careful pipeline staging and credit-based flow control between the FAT reader and the BRAM writer.
-        </p>
+        <h2>Technical Stack</h2>
+        <ul>
+          <li>Verilog — RTL design, simulation, and synthesis (majority of code).</li>
+          <li>Python / Jupyter — Image preprocessing and binary/COE generation for SD content.</li>
+          <li>Tcl — Vivado project scripting and build automation.</li>
+          <li>Tools: Xilinx Vivado, Basys 3 board, XDC constraint for pin mapping.</li>
+        </ul>
+
+        <h2>Repository Structure</h2>
+        <pre>
+src/
+├── TopModule.v       # Top-level integration module
+├── sd_master.v       # SPI SD card controller
+├── VGASync.v         # VGA horizontal/vertical sync generator
+├── Controller.v      # System state machine & control logic
+└── Feeder.v          # Pixel data feeder to VGA output
+
+bin generator/        # Python scripts for image → binary conversion
+coe/                  # Memory initialization files (.coe)
+sim/                  # Testbenches and simulation files
+utils/                # Utility scripts
+top.xdc               # Basys 3 pin constraint file
+        </pre>
+
+        <h2>What I Learned</h2>
+        <ul>
+          <li>Implemented SPI in Verilog to interface with a microSD card without IP cores.</li>
+          <li>Designed a VGA controller from first principles, handling pixel clock and blanking correctly.</li>
+          <li>Built a robust data pipeline from SD block reads → pixel buffering → VGA raster output.</li>
+          <li>Used Python tooling to prepare image data and automated Vivado flows with Tcl.</li>
+        </ul>
+
+        <p>Repository: <em>2110363-HW-SYN-LAB/2-2024-final-project-jarnyam</em></p>
       </div>
     </div>
   </body>
