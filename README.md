@@ -84,7 +84,13 @@ actions/checkout
     │
     ▼
 _site/
-  ├── index.html                        ← sidebar navigation
+  ├── index.html            ← landing / about page
+  ├── projects.html         ← project gallery
+  ├── cv.html               ← CV viewer
+  ├── sidebar.html          ← shared sidebar component
+  ├── theme.js              ← shared sidebar loader + dark-mode toggle
+  ├── favicon.svg
+  ├── portfolio/            ← styles, project data + pages
   └── CV/
       ├── Boonyakorn_Tanrattanakorn_CV.html
       └── Boonyakorn_Tanrattanakorn_CV.pdf

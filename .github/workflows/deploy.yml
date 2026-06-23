@@ -8,7 +8,11 @@ on:
       - 'CV/**'
       - 'portfolio/**'
       - 'index.html'
+      - 'projects.html'
+      - 'cv.html'
       - 'sidebar.html'
+      - 'theme.js'
+      - 'favicon.svg'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -34,10 +38,14 @@ jobs:
       - name: Prepare output directory
         run: |
           mkdir -p _site/CV _site/portfolio
+          # Top-level pages and shared assets
           cp index.html _site/index.html
+          cp projects.html _site/projects.html
+          cp cv.html _site/cv.html
           cp sidebar.html _site/sidebar.html
-          # Copy all portfolio files
-          cp -r portfolio/portfolio.html _site/portfolio/
+          cp theme.js _site/theme.js
+          cp favicon.svg _site/favicon.svg
+          # Portfolio data + assets
           cp -r portfolio/projects.json _site/portfolio/
           # Copy portfolio stylesheet so project pages resolve ../../styles.css correctly
           cp -r portfolio/styles.css _site/portfolio/styles.css
