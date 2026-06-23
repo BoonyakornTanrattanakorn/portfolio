@@ -9,6 +9,7 @@ on:
       - 'portfolio/**'
       - 'index.html'
       - 'projects.html'
+      - 'profile.html'
       - 'cv.html'
       - 'sidebar.html'
       - 'theme.js'
@@ -41,6 +42,7 @@ jobs:
           # Top-level pages and shared assets
           cp index.html _site/index.html
           cp projects.html _site/projects.html
+          cp profile.html _site/profile.html
           cp cv.html _site/cv.html
           cp sidebar.html _site/sidebar.html
           cp theme.js _site/theme.js
