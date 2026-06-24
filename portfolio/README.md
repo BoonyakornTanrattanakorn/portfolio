@@ -1,55 +1,70 @@
+# Portfolio — project data
 
-# Portfolio — Documentation
+This folder holds the data and assets for the project gallery. The gallery page
+itself is [`../projects.html`](../projects.html) at the repo root; it fetches the
+files here at runtime to build the cards, search, sort, and tag filters.
 
-This folder contains the source and metadata for the project portfolio shown on the site. It includes an index page that lists projects and a `projects/` directory with each project's files and metadata.
+## Contents
 
-Contents
-- `portfolio.html` — The portfolio index page used on the site.
-- `projects.json` — A generated/compiled manifest of projects (if used by your build or site).
-- `projects/` — Subfolders for each project. Each project folder typically contains an `index.html` and a `meta.json` file describing the project.
+- `projects.json` — ordered list of project slugs to display, e.g.
+  `["cursr-iv", "fpga-video-player", ...]`. Order controls default display order.
+- `styles.css` — shared stylesheet for every page on the site.
+- `meta-loader.js` — included by each project's `index.html`; reads that project's
+  `meta.json` and fills in the page title, meta line, tags, and thumbnail.
+- `projects/<slug>/` — one folder per project.
 
-Project folder structure
+## Project folder structure
 
-Each project lives under `projects/<project-slug>/`. A typical project folder contains:
-- `index.html` — The project's detailed page or demo.
-- `meta.json` — Project metadata used to populate the portfolio index.
+Each project lives under `projects/<slug>/` and typically contains:
 
-Recommended `meta.json` schema (example)
+- `index.html` — the project's detail page (includes `../../meta-loader.js`).
+- `meta.json` — project metadata used by both the gallery and the detail page.
+- image/asset files (`.png`, `.gif`, `.jpg`, `.glb`, …).
 
+### `meta.json` schema
+
+```json
 {
-	"title": "Project Title",
-	"summary": "Short one-line summary",
-	"date": "YYYY-MM-DD",
-	"tags": ["tag1","tag2"],
-	"repo": "https://github.com/username/repo",
-	"live": "relative/or/absolute/url"
+  "title": "Project Title",
+  "role": "Your role on the project",
+  "date": "2024",
+  "organization": "Org or context",
+  "tags": ["tag1", "tag2"],
+  "thumbnail": "image.png",
+  "summary": "Short one-line summary."
 }
+```
 
-How to add a new project
-1. Create a new folder `projects/<your-slug>/`.
-2. Add an `index.html` with your project content or demo.
-3. Add a `meta.json` using the schema above.
-4. Optionally update `projects.json` or run whatever build step your site uses to regenerate the index.
+Notes:
+- `thumbnail` is a filename **relative to the project folder** (or empty for none —
+  a "No image" placeholder is shown).
+- `tags` feed both the gallery's tag filters and the home page's "Skills & Tools"
+  aggregate, so keep them consistent across projects.
+- `date` may be a full date or just a year; it is used for newest/oldest sorting.
 
-Local preview
-- Open `portfolio/portfolio.html` in a browser to preview the portfolio page.
-- For a more accurate preview (relative links, fetches), serve the folder over a local HTTP server, e.g.:
+## Adding a new project
 
-	python -m http.server 8000
+1. Create `projects/<your-slug>/`.
+2. Add an `index.html` (project content) and a `meta.json` (schema above).
+3. Add `"<your-slug>"` to `projects.json` in the position you want it to appear.
 
- then open `http://localhost:8000/portfolio/portfolio.html`.
+## Local preview
 
-Deployment notes
-- The portfolio files are static; deploy the `portfolio/` contents to your web host or include them in your site's build/publishing pipeline.
-- Ensure any absolute or root-relative links are adjusted to match your deployment path.
+Serve the **repo root** over HTTP so relative fetches resolve, then open the site:
 
-Contributing
-- Keep `meta.json` concise and consistent across projects.
-- Use descriptive tags and a clear summary to improve discoverability.
+```bash
+python -m http.server 8000
+# then open http://localhost:8000/projects.html
+```
 
-# Misc
-Model Compression
-- This can reduce filesize by 90%
+Opening the HTML files directly via `file://` will break the `fetch()` calls for
+the sidebar and `meta.json`.
+
+## Misc — GLB model compression
+
+Optimizing `.glb` models (e.g. `projects/cursr-iv/FC.glb`) can cut file size by
+~90%:
+
 ```cmd
- npx @gltf-transform/cli optimize in.glb out.glb
+npx @gltf-transform/cli optimize in.glb out.glb
 ```
