@@ -16,6 +16,19 @@ cv:
           - 'GPA: 3.91/4.00'
           - '**Relevant Coursework**: Computer Programming (A), Introduction to Data Structures (A), Operating Systems and Programs (A), Database Systems (A), Algorithm Design (A), Hardware Synthesis Laboratory (A),
             Embedded System Laboratory (A), Software Engineering (A), Introduction to Robotics (A), Computer Networks I (A)'
+    experience:
+      - company: Ivory Electronics Co. Ltd.
+        position: Embedded System Engineer Intern
+        start_date: 2026-06
+        end_date: present
+        location: Thailand
+        highlights:
+          - Architected a multilayered Arduino firmware (driver → manager → app → UI) for a hydrogen electrolysis
+            teaching instrument, acquiring hydrogen separation current, half-cell voltage, and total dissolved solids
+            via **ADC**.
+          - Diagnosed a faulty voltage reference IC causing ADC drift; implemented a **median filter** to stabilise
+            readings and restore measurement accuracy.
+          - Designed a 3D-printed instrument enclosure in **Onshape**, including sensor mounts and wiring layout.
     projects:
       - name: Project CURSR-III
         date: '2023'

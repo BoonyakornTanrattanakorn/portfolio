@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.6/schema.json
+cv:
+  name: Boonyakorn Tanrattanakorn
+  location: Nonthaburi, Thailand
+  email: boonyakorn.tan@gmail.com
+  phone: tel:+66-89-926-2211
+  sections:
+    education:
+      - institution: Chulalongkorn University
+        area: Computer Engineering
+        degree: BE
+        start_date: 2023-09
+        end_date: present
+        location: Bangkok, Thailand
+        highlights:
+          - 'GPA: 3.93/4.00'
+          - '**Relevant Coursework**: Calculus I & II, Computer Engineering Mathematics I & II, General Physics
+            I & II, Statistical Physics for Science, VLSI Design, Digital Computer Logic, 
+            Hardware Synthesis Laboratory, Embedded System Laboratory, Computer Vision, Computer
+            Graphics'
+    experience:
+      - company: Ivory Electronics Co. Ltd.
+        position: Embedded System Engineer Intern
+        start_date: 2026-06
+        end_date: present
+        location: Thailand
+        highlights:
+          - Architected a multilayered Arduino firmware (driver → manager → app → UI) for a hydrogen electrolysis
+            teaching instrument, acquiring hydrogen separation current, half-cell voltage, and total dissolved solids
+            via **ADC**.
+          - Diagnosed a faulty voltage reference IC causing ADC drift; implemented a **median filter** to stabilise
+            readings and restore measurement accuracy.
+          - Designed a 3D-printed instrument enclosure in **Onshape**, including sensor mounts and wiring layout.
+    projects:
+      - name: FPGA Real-Time Video Player
+        date: '2025'
+        summary: Academic Project | Verilog
+        highlights:
+          - Implemented a real-time video processing pipeline on a Xilinx Basys-3 **FPGA** in **Verilog** with VGA
+            output — directly analogous to the digital back-end of an optical imaging or spectroscopy instrument.
+          - Developed an SPI-based SD card controller to stream 320x240 RGB frames into dual-port RAM, managing
+            clock-domain crossing and real-time throughput constraints fundamental to FPGA-based signal acquisition.
+      - name: Smoothed Particle Hydrodynamics Simulator
+        date: '2025'
+        summary: Personal Project | Godot
+        highlights:
+          - Built a real-time 2D physics simulator solving the governing **partial differential equations** of fluid
+            dynamics numerically, demonstrating applied PDE and numerical-methods skill transferable to wave-equation
+            and field modeling.
+          - Implemented GPU-accelerated density and pressure-force computations with **GLSL compute shaders**.
+      - name: Project CURSR-IV
+        date: '2024'
+        summary: Chulalongkorn University High Altitude Research Club | Avionics Engineer
+        highlights:
+          - Developed embedded firmware on **STM32 (C/C++)** for multi-sensor integration, telemetry, and flight control.
+          - Modeled and simulated a closed-loop active airbrake control system in **Simulink** (applied differential
+            equations and systems theory).
+          - Designed and assembled a 4-layer SMT flight computer **PCB** using **KiCad**.
+          - Participated in the fly-off team at the **International Rocket Engineering Competition 2025** in USA.
+    technical_skills:
+      - label: Hardware
+        details: FPGA (Verilog, Xilinx Basys-3), Digital Logic Design, STM32 & ESP32, PCB Design (KiCad)
+      - label: Programming & Tools
+        details: Python, C, C++, C#, Java, Verilog, GLSL; MATLAB/Simulink, OnShape
+      - label: Languages
+        details: 'Thai: Native, English: IELTS 7.5, Japanese: JLPT N4'
+design:
+  theme: engineeringresumes
+locale:
+  language: english
+settings:
+  current_date: '2026-06-29'
+  render_command:
+    typst_path: Photonics_resume/Boonyakorn_Tanrattanakorn_Photonics_resume.typ
+    pdf_path: Photonics_resume/Boonyakorn_Tanrattanakorn_Photonics_resume.pdf
+    markdown_path: Photonics_resume/Boonyakorn_Tanrattanakorn_Photonics_resume.md
+    html_path: Photonics_resume/Boonyakorn_Tanrattanakorn_Photonics_resume.html
+    dont_generate_png: true
