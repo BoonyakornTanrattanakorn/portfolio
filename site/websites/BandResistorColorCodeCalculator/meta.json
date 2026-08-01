@@ -1,0 +1,11 @@
+{
+  "title": "Resistor Colour Code Calculator",
+  "url": "https://boonyakorntanrattanakorn.github.io/BandResistorColorCodeCalculator/",
+  "role": "Frontend Developer",
+  "date": "2026",
+  "organization": "Personal Project",
+  "status": "live",
+  "tags": ["JavaScript", "HTML", "CSS", "SVG", "GitHub Pages"],
+  "thumbnail": "BandResistorColorCodeCalculator.png",
+  "summary": "Converts resistor colour bands into a resistance value and back again, covering 3, 4, 5 and 6-band resistors, with shareable result links."
+}

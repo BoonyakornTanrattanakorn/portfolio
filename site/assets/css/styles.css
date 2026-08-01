@@ -89,6 +89,17 @@ header { display: flex; align-items: center; gap: 16px }
 
 /* Remove explicit view button (cards themselves are links now) */
 .card-link { display: none }
+
+/* External-link cards (websites): outward arrow + status pill */
+.ext-mark { color: var(--muted); font-size: 0.85em; margin-left: 6px }
+.card:hover .ext-mark, .card:focus-within .ext-mark { color: var(--link) }
+.status-pill { float: right; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 999px; background: var(--tag-bg); color: var(--tag-text); font-weight: 600 }
+.status-live { background: #d8f3e3; color: #14683f }
+.status-wip { background: #fdf0d0; color: #7a5600 }
+.status-archived { background: var(--tag-bg); color: var(--muted) }
+html[data-theme="dark"] .status-live { background: #16382a; color: #7fd6a8 }
+html[data-theme="dark"] .status-wip { background: #3a2f14; color: #e8c46a }
+.card.is-archived .card-thumb { filter: grayscale(1); opacity: 0.65 }
 .loading { color: var(--muted); margin-top: 24px; font-size: 0.95rem }
 .error-msg { color: var(--error); margin-top: 24px; font-size: 0.9rem }
 footer { margin-top: 28px; color: var(--muted); font-size: 0.9rem }

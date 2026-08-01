@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.6/schema.json
+cv:
+  name: Boonyakorn Tanrattanakorn
+  location: Nonthaburi, Thailand
+  email: boonyakorn.tan@gmail.com
+  phone: tel:+66-89-926-2211
+  sections:
+    education:
+      - institution: Chulalongkorn University
+        area: Computer Engineering
+        degree: BE
+        start_date: 2023-09
+        end_date: present
+        location: Bangkok, Thailand
+        highlights:
+          - 'GPA: 3.91/4.00'
+          - '**Relevant Coursework**: Introduction to Data Structures (A), Algorithm Design (A), Database Systems (A), Software Engineering (A), Computer Networks I (A), Operating Systems and Programs (A)'
+    projects:
+      - name: ThamRoi
+        date: '2025'
+        summary: Software Engineering Course, Chulalongkorn University | Full-Stack Developer
+        highlights:
+          - Built a full-stack matchmaking web application with a **Next.js (React)** frontend and a **Node.js** REST API in **TypeScript**.
+          - Designed a **PostgreSQL** schema with **Prisma ORM**; wrote seed scripts, migration-ready models, and type-safe query controllers.
+          - Implemented **JWT**-based admin authentication with a full moderation system — report tagging, resolve/unresolve flows, and admin dashboard UI.
+          - Delivered end-to-end features for group search (filters + live results), profile API integration, and ToS consent UI with enforced scroll-to-read behavior.
+      - name: Personal Portfolio Website
+        date: '2025'
+        summary: Personal Project | HTML, CSS, JavaScript
+        highlights:
+          - Designed and built a personal portfolio website from scratch using **HTML**, **CSS**, and vanilla **JavaScript** — no frameworks.
+          - Deployed and hosted on **GitHub Pages** at boonyakorntanrattanakorn.github.io/portfolio.
+      - name: Smoothed Particle Hydrodynamics Simulator
+        date: '2025'
+        summary: Personal Project | Godot, GLSL
+        highlights:
+          - Implemented a real-time 2D fluid dynamics simulator in **Godot Engine** (**GDScript**) based on the SPH computational method.
+          - Accelerated density and pressure force calculations using **GLSL compute shaders**, demonstrating algorithm design and GPU programming.
+      - name: Project CURSR-IV
+        date: '2024'
+        summary: Chulalongkorn University High Altitude Research Club | Avionics Engineer
+        highlights:
+          - Developed embedded firmware in **C/C++** on **STM32** for sensor integration, flight control, and a **LoRa**-based telemetry mesh network.
+          - Participated in the fly-off team at the **International Rocket Engineering Competition 2025** in USA.
+    technical_skills:
+      - label: Programming
+        details: TypeScript, JavaScript, Python, C#, Java, C/C++
+      - label: Web & Backend
+        details: Next.js, React, Node.js, Tailwind CSS, Flask
+      - label: Databases
+        details: PostgreSQL (RDBMS), Prisma ORM
+      - label: Other
+        details: STM32, ESP32, FPGA, KiCad, Fusion 360
+      - label: Languages
+        details: 'Thai: Native, English: IELTS 7.5, Japanese: JLPT N4'
+design:
+  theme: engineeringresumes
+locale:
+  language: english
+settings:
+  current_date: '2026-03-07'
+  render_command:
+    typst_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.typ
+    pdf_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.pdf
+    markdown_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.md
+    html_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.html
+    dont_generate_png: true

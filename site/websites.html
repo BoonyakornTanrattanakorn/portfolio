@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Portfolio — Boonyakorn Tanrattanakorn</title>
-    <meta name="description" content="Selected engineering projects by Boonyakorn Tanrattanakorn — embedded systems, FPGA, simulation, and full-stack web." />
-    <meta property="og:title" content="Portfolio — Boonyakorn Tanrattanakorn" />
-    <meta property="og:description" content="Selected engineering projects: embedded systems, FPGA, simulation, full-stack." />
+    <title>Websites — Boonyakorn Tanrattanakorn</title>
+    <meta name="description" content="Websites built by Boonyakorn Tanrattanakorn — live full-stack and front-end web applications." />
+    <meta property="og:title" content="Websites — Boonyakorn Tanrattanakorn" />
+    <meta property="og:description" content="Live websites and web applications." />
     <meta property="og:image" content="https://avatars.githubusercontent.com/u/156056911?v=4" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -25,15 +25,15 @@
       <main class="app-content">
         <div class="wrap">
           <section>
-            <h1 style="margin:8px 0 4px">Portfolio</h1>
-            <p class="lead">Selected projects and highlights. Click a card to read more.</p>
+            <h1 style="margin:8px 0 4px">Websites</h1>
+            <p class="lead">Sites I've built. Clicking a card opens the live site in a new tab.</p>
           </section>
 
           <section style="margin-top:12px" class="controls">
-            <input id="search" type="search" placeholder="Search projects (title, summary, tags)" aria-label="Search projects" />
+            <input id="search" type="search" placeholder="Search websites (title, summary, tags)" aria-label="Search websites" />
 
             <label for="sort" style="margin-left:8px">Sort:</label>
-            <select id="sort" aria-label="Sort projects">
+            <select id="sort" aria-label="Sort websites">
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
               <option value="az">Title A–Z</option>
@@ -44,7 +44,7 @@
           </section>
 
           <section class="grid" id="project-grid">
-            <p class="loading">Loading projects…</p>
+            <p class="loading">Loading websites…</p>
           </section>
         </div>
       </main>
@@ -54,10 +54,20 @@
     <script src="assets/js/collection.js"></script>
     <script>
       initCollection({
-        manifest: 'projects/projects.json',
-        base: 'projects/',
-        noun: 'projects',
-        cardHref: (id) => `projects/${id}/index.html`,
+        manifest: 'websites/websites.json',
+        base: 'websites/',
+        noun: 'websites',
+        external: true,
+        cardHref: (id, meta) => meta.url || '#',
+        // Show a status pill (live / wip / archived) and dim archived screenshots.
+        decorate: (card, body, meta) => {
+          if (!meta.status) return;
+          const pill = document.createElement('span');
+          pill.className = `status-pill status-${String(meta.status).toLowerCase()}`;
+          pill.textContent = meta.status;
+          body.querySelector('h3').appendChild(pill);
+          if (String(meta.status).toLowerCase() === 'archived') card.classList.add('is-archived');
+        },
       });
     </script>
   </body>
