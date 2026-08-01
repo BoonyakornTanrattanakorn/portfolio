@@ -18,7 +18,7 @@
     <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/156056911?v=4" />
 
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="portfolio/styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
 
     <!-- Apply theme before paint to avoid a flash -->
     <script>
@@ -76,16 +76,16 @@
       </main>
     </div>
 
-    <script src="theme.js"></script>
+    <script src="assets/js/theme.js"></script>
     <script>
       // Build a "Skills & Tools" view by aggregating tags across all projects.
       (async function () {
         const mount = document.getElementById('skill-groups');
         try {
-          const ids = await (await fetch('portfolio/projects.json')).json();
+          const ids = await (await fetch('projects/projects.json')).json();
           const metas = await Promise.all(
             ids.map((id) =>
-              fetch(`portfolio/projects/${id}/meta.json`)
+              fetch(`projects/${id}/meta.json`)
                 .then((r) => (r.ok ? r.json() : null))
                 .catch(() => null)
             )

@@ -6,14 +6,7 @@ on:
       - main
     paths:
       - 'CV/**'
-      - 'portfolio/**'
-      - 'index.html'
-      - 'projects.html'
-      - 'profile.html'
-      - 'cv.html'
-      - 'sidebar.html'
-      - 'theme.js'
-      - 'favicon.svg'
+      - 'site/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -38,22 +31,12 @@ jobs:
 
       - name: Prepare output directory
         run: |
-          mkdir -p _site/CV _site/portfolio
-          # Top-level pages and shared assets
-          cp index.html _site/index.html
-          cp projects.html _site/projects.html
-          cp profile.html _site/profile.html
-          cp cv.html _site/cv.html
-          cp sidebar.html _site/sidebar.html
-          cp theme.js _site/theme.js
-          cp favicon.svg _site/favicon.svg
-          # Portfolio data + assets
-          cp -r portfolio/projects.json _site/portfolio/
-          # Copy portfolio stylesheet so project pages resolve ../../styles.css correctly
-          cp -r portfolio/styles.css _site/portfolio/styles.css
-          cp -r portfolio/meta-loader.js _site/portfolio/meta-loader.js
-          mkdir -p _site/portfolio/projects
-          cp -r portfolio/projects/* _site/portfolio/projects/
+          mkdir -p _site/CV
+          # site/ holds the entire deployable site; its contents become the web root
+          # so published URLs stay at /index.html, /assets/..., /projects/<id>/.
+          cp -r site/. _site/
+          # Markdown notes live alongside the projects but are not part of the site.
+          find _site -name "*.md" -delete
           find CV -name "*.html" -exec cp {} _site/CV/Boonyakorn_Tanrattanakorn_CV.html \;
           find CV -name "*.pdf" -exec cp {} _site/CV/Boonyakorn_Tanrattanakorn_CV.pdf \; || true
 

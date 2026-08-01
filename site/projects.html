@@ -9,7 +9,7 @@
     <meta property="og:description" content="Selected engineering projects: embedded systems, FPGA, simulation, full-stack." />
     <meta property="og:image" content="https://avatars.githubusercontent.com/u/156056911?v=4" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="portfolio/styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
     <script>
       (function () {
         var s = localStorage.getItem('theme');
@@ -50,10 +50,10 @@
       </main>
     </div>
 
-    <script src="theme.js"></script>
+    <script src="assets/js/theme.js"></script>
     <script>
       /** Project loader + search / sort / filter UI */
-      const PROJECT_BASE = 'portfolio/';
+      const PROJECT_BASE = 'projects/';
 
       const grid = document.getElementById('project-grid');
       const searchInput = document.getElementById('search');
@@ -66,13 +66,13 @@
       function renderCard(id, meta) {
         const card = document.createElement('a');
         card.className = 'card';
-        card.href = `${PROJECT_BASE}projects/${id}/index.html`;
+        card.href = `${PROJECT_BASE}${id}/index.html`;
         card.setAttribute('aria-label', meta.title || id);
 
         if (meta.thumbnail) {
           const img = document.createElement('img');
           img.className = 'card-thumb';
-          img.src = `${PROJECT_BASE}projects/${id}/${String(meta.thumbnail).trim()}`;
+          img.src = `${PROJECT_BASE}${id}/${String(meta.thumbnail).trim()}`;
           img.alt = `${meta.title || id} thumbnail`;
           img.loading = 'lazy';
           img.onerror = () => {
@@ -209,7 +209,7 @@
 
           const metas = await Promise.all(
             ids.map((id) =>
-              fetch(`${PROJECT_BASE}projects/${id}/meta.json`)
+              fetch(`${PROJECT_BASE}${id}/meta.json`)
                 .then((r) => { if (!r.ok) throw new Error(`${id}/meta.json: ${r.status}`); return r.json(); })
                 .then((meta) => ({ id, meta }))
                 .catch((err) => ({ id, error: err.message }))
