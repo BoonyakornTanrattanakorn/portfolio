@@ -27,7 +27,7 @@ cv:
           - Delivered end-to-end features for group search (filters + live results), profile API integration, and ToS consent UI with enforced scroll-to-read behavior.
       - name: ACC 2026 Flight Telemetry Dashboard
         date: '2026'
-        summary: Personal Project | Full-Stack Developer
+        summary: Personal Project
         highlights:
           - Built a browser-based dashboard for exploring Air Cargo Challenge 2026 standings and flight logs, with **3D flight replay** rendered in **Three.js** alongside synchronised altitude and speed charts in **Chart.js**.
           - Processed raw flight telemetry into structured, web-ready datasets using **Python** and **pandas**.
@@ -41,7 +41,7 @@ cv:
       #     - Deployed as a static site on **GitHub Pages** — [boonyakorntanrattanakorn.github.io/BandResistorColorCodeCalculator](https://boonyakorntanrattanakorn.github.io/BandResistorColorCodeCalculator/)
       - name: Personal Portfolio Website
         date: '2025'
-        summary: Personal Project | HTML, CSS, JavaScript
+        summary: Personal Project
         highlights:
           - Designed and built a personal portfolio website using **HTML**, **CSS**, and **JavaScript**.
           - Structured project and website entries as static **JSON** manifests rendered by a shared client-side engine.
