@@ -4,6 +4,7 @@ cv:
   location: Nonthaburi, Thailand
   email: boonyakorn.tan@gmail.com
   phone: tel:+66-89-926-2211
+  # website: https://boonyakorntanrattanakorn.github.io/portfolio/
   sections:
     education:
       - institution: Chulalongkorn University
@@ -13,7 +14,7 @@ cv:
         end_date: present
         location: Bangkok, Thailand
         highlights:
-          - 'GPA: 3.91/4.00'
+          - 'GPA: 3.93/4.00'
           - '**Relevant Coursework**: Introduction to Data Structures (A), Algorithm Design (A), Database Systems (A), Software Engineering (A), Computer Networks I (A), Operating Systems and Programs (A)'
     projects:
       - name: ThamRoi
@@ -22,35 +23,37 @@ cv:
         highlights:
           - Built a full-stack matchmaking web application with a **Next.js (React)** frontend and a **Node.js** REST API in **TypeScript**.
           - Designed a **PostgreSQL** schema with **Prisma ORM**; wrote seed scripts, migration-ready models, and type-safe query controllers.
-          - Implemented **JWT**-based admin authentication with a full moderation system — report tagging, resolve/unresolve flows, and admin dashboard UI.
+          - Implemented **JWT**-based admin authentication with a full moderation system - report tagging, resolve/unresolve flows, and admin dashboard UI.
           - Delivered end-to-end features for group search (filters + live results), profile API integration, and ToS consent UI with enforced scroll-to-read behavior.
+      - name: ACC 2026 Flight Telemetry Dashboard
+        date: '2026'
+        summary: Personal Project | Full-Stack Developer
+        highlights:
+          - Built a browser-based dashboard for exploring Air Cargo Challenge 2026 standings and flight logs, with **3D flight replay** rendered in **Three.js** alongside synchronised altitude and speed charts in **Chart.js**.
+          - Processed raw flight telemetry into structured, web-ready datasets using **Python** and **pandas**.
+          - Deployed on **GitHub Pages** — [boonyakorntanrattanakorn.github.io/ACC26FlightDataVisualization](https://boonyakorntanrattanakorn.github.io/ACC26FlightDataVisualization/)
+      # - name: Resistor Colour Code Calculator
+      #   date: '2026'
+      #   summary: Personal Project | Frontend Developer
+      #   highlights:
+      #     - Built a bidirectional calculator converting resistor colour bands to resistance and back, supporting **3, 4, 5, and 6-band** resistors.
+      #     - Rendered interactive resistor graphics with inline **SVG** in vanilla **JavaScript**; implemented shareable result links via URL state.
+      #     - Deployed as a static site on **GitHub Pages** — [boonyakorntanrattanakorn.github.io/BandResistorColorCodeCalculator](https://boonyakorntanrattanakorn.github.io/BandResistorColorCodeCalculator/)
       - name: Personal Portfolio Website
         date: '2025'
         summary: Personal Project | HTML, CSS, JavaScript
         highlights:
-          - Designed and built a personal portfolio website from scratch using **HTML**, **CSS**, and vanilla **JavaScript** — no frameworks.
-          - Deployed and hosted on **GitHub Pages** at boonyakorntanrattanakorn.github.io/portfolio.
-      - name: Smoothed Particle Hydrodynamics Simulator
-        date: '2025'
-        summary: Personal Project | Godot, GLSL
-        highlights:
-          - Implemented a real-time 2D fluid dynamics simulator in **Godot Engine** (**GDScript**) based on the SPH computational method.
-          - Accelerated density and pressure force calculations using **GLSL compute shaders**, demonstrating algorithm design and GPU programming.
-      - name: Project CURSR-IV
-        date: '2024'
-        summary: Chulalongkorn University High Altitude Research Club | Avionics Engineer
-        highlights:
-          - Developed embedded firmware in **C/C++** on **STM32** for sensor integration, flight control, and a **LoRa**-based telemetry mesh network.
-          - Participated in the fly-off team at the **International Rocket Engineering Competition 2025** in USA.
+          - Designed and built a personal portfolio website using **HTML**, **CSS**, and **JavaScript**.
+          - Structured project and website entries as static **JSON** manifests rendered by a shared client-side engine.
     technical_skills:
       - label: Programming
         details: TypeScript, JavaScript, Python, C#, Java, C/C++
       - label: Web & Backend
-        details: Next.js, React, Node.js, Tailwind CSS, Flask
+        details: Next.js, React, Node.js, Express, Tailwind CSS, Flask, HTML/CSS, REST APIs
       - label: Databases
         details: PostgreSQL (RDBMS), Prisma ORM
-      - label: Other
-        details: STM32, ESP32, FPGA, KiCad, Fusion 360
+      - label: Libraries & Tools
+        details: Three.js, Chart.js, pandas, Git/GitHub, GitHub Pages, SonarQube, Postman
       - label: Languages
         details: 'Thai: Native, English: IELTS 7.5, Japanese: JLPT N4'
 design:
@@ -60,8 +63,8 @@ locale:
 settings:
   current_date: '2026-03-07'
   render_command:
-    typst_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.typ
-    pdf_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.pdf
-    markdown_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.md
-    html_path: CV/Boonyakorn_Tanrattanakorn_Agoda_CV.html
+    typst_path: WebDevResume/Boonyakorn_Tanrattanakorn_WebDev.typ
+    pdf_path: WebDevResume/Boonyakorn_Tanrattanakorn_WebDev.pdf
+    markdown_path: WebDevResume/Boonyakorn_Tanrattanakorn_WebDev.md
+    html_path: WebDevResume/Boonyakorn_Tanrattanakorn_WebDev.html
     dont_generate_png: true
