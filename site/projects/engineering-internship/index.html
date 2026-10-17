@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Benchtop Chemical &amp; Electrolysis Measurement Instrument</title>
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <script src="../../assets/js/meta-loader.js" defer></script>
+    <script>(function(){var s=localStorage.getItem('theme');var d=s==='dark'||(!s&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');})();</script>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Header -->
+    <a class="back" href="../../projects.html">← Back to Portfolio</a>
+    <h1 id="project-title">Loading…</h1>
+    <div id="project-meta" class="meta">&nbsp;</div>
+    <div id="project-tags" class="tags"></div>
+
+    <figure class="inbody-figure">
+      <img id="project-thumb" class="inbody-img thumbnail" src="" alt="Project thumbnail" loading="lazy">
+      <figcaption id="project-thumb-caption"></figcaption>
+    </figure>
+
+      <!-- ── Project body ── -->
+      <div class="body">
+        <table>
+          <tbody>
+            <tr><th>Role</th><td>Embedded Systems Engineering Intern, Ivory Electronics Co., Ltd. (Nonthaburi, Thailand)</td></tr>
+            <tr><th>Program</th><td>2100301 Engineering Practice, B.Eng. Computer Engineering, Chulalongkorn University</td></tr>
+            <tr><th>Duration</th><td>11 weeks (352 hours, May 18 – July 31, 2026)</td></tr>
+            <tr><th>Supervisor</th><td>Attakawin Paetep</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Overview</h2>
+        <p>
+          Ivory Electronics is an electronics consultancy led by Dr. Daniel Melendrez, focusing on
+          embedded systems, PCB design, custom instrumentation, and dev kits. Following a one-week
+          warm-up project building a milliohmmeter, I spent the remaining ten weeks building a
+          benchtop laboratory instrument from scratch. The unit consolidates four core functions
+          into a single enclosure:
+        </p>
+        <ul>
+          <li><strong>Conductivity / TDS:</strong> Measures total dissolved solids in liquid solutions.</li>
+          <li><strong>Temperature:</strong> Tracks solution temperature for monitoring and TDS compensation.</li>
+          <li><strong>Electrolysis Current:</strong> Measures current drawn during electrolysis runs.</li>
+          <li><strong>Data Logging:</strong> Writes continuous measurement records to external storage.</li>
+        </ul>
+
+        <figure class="inbody-figure">
+          <img class="inbody-img" src="debugging.jpg" alt="The instrument opened up on the bench, probed with a multimeter while its three displays show live TDS and temperature readings" loading="lazy">
+          <figcaption>
+            The instrument open on the bench next to a reference multimeter. The three screens
+            show the custom TDS channel, the dev-board TDS channel, and the compensated
+            temperature reading.
+          </figcaption>
+        </figure>
+
+        <h2>Firmware Development</h2>
+        <p>
+          Developed in C++ using the pioarduino framework on an ESP32 via VS Code. Key components
+          included:
+        </p>
+        <ul>
+          <li>Writing peripheral drivers to integrate the full sensor suite.</li>
+          <li>Designing an on-device interface for a small screen under strict memory limits.</li>
+          <li>Building a persistent settings system to save configuration state.</li>
+          <li>Implementing a calibration subsystem to convert raw ADC counts into calibrated units.</li>
+          <li>Setting up external memory logging for continuous data collection.</li>
+          <li>Refactoring the initial single-file codebase into modular components as features grew,
+              alongside writing inline code documentation and a user manual.</li>
+        </ul>
+
+        <h2>Hardware &amp; ADC Troubleshooting</h2>
+        <p>
+          Initial ADC readings showed persistent measurement offsets. After extensive software
+          debugging without results, physical probing with a multimeter revealed the root cause:
+          the voltage reference chip on the board was out of tolerance, introducing systematic
+          error into every conversion.
+        </p>
+        <p>
+          Resolving this shifted my debugging approach. Instead of assuming issues were
+          firmware-bound, I incorporated schematic reviews, power rail probing, and
+          reference-instrument checks into the workflow. I also built a runtime-state introspection
+          tool to monitor the ESP32's internal state during live operation.
+        </p>
+
+        <h2>Enclosure &amp; Mechanical Design</h2>
+        <p>
+          Using Onshape, I modeled a custom sloped enclosure around the measured dimensions of the
+          PCB, display, control buttons, and rear connectors. The design was revised to account for
+          component tolerances and wire routing before 3D printing the final shell.
+        </p>
+
+        <figure class="inbody-figure">
+          <img class="inbody-img" src="CAD.png" alt="Onshape assembly of the sloped instrument enclosure, with cutouts for three displays, buttons and connectors" loading="lazy">
+          <figcaption>
+            The enclosure assembly in Onshape: sloped front panel with cutouts for the three
+            displays, the button array, and the rear connectors.
+          </figcaption>
+        </figure>
+
+        <h2>Validation &amp; Field Testing</h2>
+        <p>
+          The instrument was tested against live electrolysis setups, including a copper-electrode
+          cell with an inverted graduated cylinder for gas collection. Testing under actual
+          experimental conditions exposed stability issues and edge cases missed during bench
+          testing, leading to reworks of both the display logic and the calibration workflow.
+        </p>
+
+        <figure class="inbody-figure">
+          <img class="inbody-img" src="electrolysis.jpg" alt="An electrolysis cell in a beaker: copper electrodes held by multimeter clips, with an inverted graduated cylinder collecting gas" loading="lazy">
+          <figcaption>
+            An electrolysis run: copper electrodes clipped into a beaker, with an inverted
+            graduated cylinder collecting the evolved gas.
+          </figcaption>
+        </figure>
+
+        <h2>Key Engineering Takeaways</h2>
+        <ul>
+          <li><strong>Hardware dictates software requirements:</strong> Final system behavior only
+              stabilized once the physical hardware was running, requiring several firmware
+              rewrites.</li>
+          <li><strong>Codebase maintainability:</strong> As the project progressed, untracked side
+              effects began breaking existing features. Splitting the project into independent
+              modules and documenting code concurrently resolved this.</li>
+          <li><strong>Lab testing vs. field testing:</strong> Bench tests failed to catch noise and
+              stability issues that appeared immediately during actual electrolysis runs.</li>
+          <li><strong>System integration:</strong> Mechanical constraints, hardware layout, and
+              firmware design are interdependent—a functional PCB is incomplete if it cannot be
+              assembled cleanly inside its enclosure.</li>
+        </ul>
+
+        <h2>The Report Repository</h2>
+        <p>
+          The internship report is a version-controlled XeLaTeX document rather than a Word file.
+          Thai has no spaces between words, so XeTeX treats a whole run as one unbreakable word and
+          the text overruns the margins. <code>\XeTeXlinebreaklocale "th_TH"</code> enables the ICU
+          Thai word breaker, with document-wide hyphenation suppression, since Thai orthography has
+          no hyphen (ผู้ควบ-คุม is wrong).
+        </p>
+        <p>
+          <code>\url{}</code> splits text into per-character boxes so it can break anywhere, which
+          detaches Thai vowels and tone marks from their base consonants (สระจม). I wrote a
+          <code>\thaiurl</code> macro that renders shaped Thai as the link text and uses the
+          percent-encoded form only as the target.
+        </p>
+        <p>
+          The rest of the faculty format is encoded in the preamble: Angsana New, 16pt bold Thai
+          body against 14pt inline English via an <code>\eng{}</code> macro, A4 with prescribed
+          margins, 1.5 line spacing, Thai-localized captions and headings, and widow/orphan
+          suppression. The cover page is full-bleed via <code>eso-pic</code>, with appendices for
+          the map and the five bi-weekly progress reports. The last commit was image compression,
+          taking the output PDF from 14 MB to 4 MB.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
