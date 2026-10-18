@@ -85,6 +85,9 @@ function devStaticAssetsPlugin() {
 
 export default defineConfig({
   plugins: [react(), devStaticAssetsPlugin()],
+  optimizeDeps: {
+    include: ['@google/model-viewer', 'meshoptimizer/decoder'],
+  },
   test: {
     environment: 'node',
     globals: true,

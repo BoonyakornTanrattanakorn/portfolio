@@ -84,7 +84,7 @@ describe('dev mode and client-side routing resolution', () => {
     beforeAll(async () => {
       devServer = await createServer({
         configFile: './vite.config.js',
-        optimizeDeps: { noDiscovery: true },
+        optimizeDeps: { noDiscovery: true, include: [] },
         server: { port: devPort },
       });
       await devServer.listen();
