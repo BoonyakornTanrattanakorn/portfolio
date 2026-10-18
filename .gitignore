@@ -2,6 +2,8 @@
 *.md
 *.typ
 !README.md
+!GEMINI_REACT_PORT_PLAN.md
+!MIGRATION_CHECKLIST.md
 
 *.acn
 *.acr
