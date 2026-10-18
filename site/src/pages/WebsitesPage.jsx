@@ -1,6 +1,7 @@
 import AppLayout from '../components/AppLayout.jsx';
+import CollectionGrid from '../features/collections/CollectionGrid.jsx';
 
-export default function WebsitesPage({ base = '/' }) {
+export default function WebsitesPage({ websites = [], base = '/', error = null }) {
   return (
     <AppLayout currentNav="websites" base={base}>
       <section>
@@ -8,9 +9,15 @@ export default function WebsitesPage({ base = '/' }) {
         <p className="lead">Sites I&apos;ve built. Clicking a card opens the live site in a new tab.</p>
       </section>
 
-      <section className="grid" id="project-grid">
-        <p className="loading">Loading websites…</p>
-      </section>
+      <CollectionGrid
+        items={websites}
+        noun="websites"
+        isExternal={true}
+        cardHref={(_id, item) => item.url || '#'}
+        mediaBase="websites/"
+        base={base}
+        error={error}
+      />
     </AppLayout>
   );
 }

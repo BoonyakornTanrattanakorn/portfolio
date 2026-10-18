@@ -60,12 +60,29 @@ export const MAIN_PAGES = [
   },
 ];
 
-export function getMainPages({ skills = [], projectCount = 0 } = {}) {
+export function getMainPages({
+  skills = [],
+  projectCount = 0,
+  projects = [],
+  websites = [],
+} = {}) {
   return MAIN_PAGES.map((page) => {
     if (page.id === 'home') {
       return {
         ...page,
         props: { skills, projectCount },
+      };
+    }
+    if (page.id === 'projects') {
+      return {
+        ...page,
+        props: { projects },
+      };
+    }
+    if (page.id === 'websites') {
+      return {
+        ...page,
+        props: { websites },
       };
     }
     return page;

@@ -94,11 +94,24 @@ async function runBuild() {
   const projectsList = rawSlugs.map((slug) => {
     const metaPath = path.join(contentDir, 'projects', slug, 'meta.json');
     const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
-    return { slug, ...meta };
+    return { id: slug, slug, ...meta };
+  });
+
+  const websitesManifestPath = path.join(contentDir, 'websites.json');
+  const rawWebsiteIds = JSON.parse(fs.readFileSync(websitesManifestPath, 'utf8'));
+  const websitesList = rawWebsiteIds.map((id) => {
+    const metaPath = path.join(contentDir, 'websites', id, 'meta.json');
+    const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+    return { id, ...meta };
   });
 
   const skills = aggregateSkills(projectsList);
-  const mainPages = getMainPages({ skills, projectCount: projectsList.length });
+  const mainPages = getMainPages({
+    skills,
+    projectCount: projectsList.length,
+    projects: projectsList,
+    websites: websitesList,
+  });
   const projectPages = getProjectPages(projectsList);
   const allPages = [...mainPages, ...projectPages];
 
@@ -175,11 +188,10 @@ async function runBuild() {
     fs.copyFileSync(metaSrc, metaDest);
   }
 
-  const websitesManifestPath = path.join(contentDir, 'websites.json');
   fs.mkdirSync(path.join(distDir, 'websites'), { recursive: true });
   fs.copyFileSync(websitesManifestPath, path.join(distDir, 'websites', 'websites.json'));
-  const websiteIds = JSON.parse(fs.readFileSync(websitesManifestPath, 'utf8'));
-  for (const id of websiteIds) {
+  for (const w of websitesList) {
+    const id = w.id;
     const metaDest = path.join(distDir, 'websites', id, 'meta.json');
     fs.mkdirSync(path.dirname(metaDest), { recursive: true });
     const metaSrc = path.join(contentDir, 'websites', id, 'meta.json');
@@ -221,7 +233,8 @@ async function runBuild() {
   }
 
   // Copy website media
-  for (const id of websiteIds) {
+  for (const w of websitesList) {
+    const id = w.id;
     const webSrc = path.join(root, 'site', 'websites', id);
     if (fs.existsSync(webSrc)) {
       for (const file of fs.readdirSync(webSrc)) {

@@ -125,7 +125,7 @@ Beneath base `/portfolio/` (production) or `/` (local):
 - [x] **Step 4:** Canonical content and selectors established (manifests and 11 metadata files migrated to site/content, validation suite, pure search/tag/sort selectors, date normalization, compatibility endpoints generated, 41 unit tests passing).
 - [x] **Step 5:** Layouts, navigation, and theme handling ported (Sidebar with navigation landmark and aria-current, AppLayout, ProjectLayout, ThemeProvider with system change listener and guarded storage, ThemeToggle with hydration-safe rendering).
 - [x] **Step 6:** About and Profile ported (HomePage and ProfilePage ported, build-time skills aggregation rendered directly in initial HTML without fetch waterfall or innerHTML, local avatar image stored at site/assets/avatar.jpg, stable absolute social image URLs).
-- [ ] **Step 7:** Collections ported and error handling fixed.
+- [x] **Step 7:** Collections ported and error handling fixed (shared Card, CollectionControls, CollectionGrid components, pure reactive search/tag/sort filtering, aria-pressed on filter tags, live region announcement, image error fallbacks, status badges with archived styling, separated item and collection error states that are never erased by empty results, 58 tests passing).
 - [ ] **Step 8:** Project article structure and all narratives ported.
 - [ ] **Step 9:** Interactive media integrated (3D models, lazy loading, YouTube).
 - [ ] **Step 10:** CV and resume artifacts integrated.

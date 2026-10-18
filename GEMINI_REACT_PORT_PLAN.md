@@ -229,7 +229,7 @@ Finish by reporting the branch name, the ordered commits, the verification resul
 - [x] Step 4 — Canonical content and selectors
 - [x] Step 5 — Layouts, navigation, and theme
 - [x] Step 6 — About and Profile
-- [ ] Step 7 — Collections and error handling
+- [x] Step 7 — Collections and error handling
 - [ ] Step 8 — All project narratives
 - [ ] Step 9 — Interactive media
 - [ ] Step 10 — CV and resume artifacts
