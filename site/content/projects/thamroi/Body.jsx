@@ -1,0 +1,222 @@
+import { withBase } from '../../../src/utils/paths.js';
+import ProjectFigure from '../../../src/components/ProjectFigure.jsx';
+
+export default function ThamroiBody({ base = '/' }) {
+  const adminDashboardImg = withBase('projects/thamroi/admin-dashboard.gif', base);
+  const postmanImg = withBase('projects/thamroi/postmanapi.png', base);
+
+  return (
+    <>
+      <h2>Overview</h2>
+      <p>
+        ThamRoi is a collaborative social platform built with <strong>TypeScript</strong>,{' '}
+        <strong>Next.js</strong> (frontend) and <strong>Node.js / Express / Prisma</strong> (backend),
+        developed by the G08SE25 Kikkaksaranungkukuk team following Agile/Scrum methodology across
+        multiple sprints (Aug 2025 – Nov 2025). I contributed full-stack features spanning
+        authentication, search, profile integration, admin moderation, and deployment fixes.
+      </p>
+
+      <h2>
+        Frontend Development <small>(TypeScript / Next.js / SCSS)</small>
+      </h2>
+      <ul>
+        <li>
+          Designed and implemented the <strong>Group Searching page UI</strong> from scratch, including
+          search input, filter controls, and results display components.
+        </li>
+        <li>
+          Integrated the Group Search page with the backend REST API, handling query parameters and
+          dynamic data rendering.
+        </li>
+        <li>
+          Connected the <strong>Profile View page</strong> to the backend, enabling live user data display.
+        </li>
+        <li>
+          Built a comprehensive <strong>Admin Reports Dashboard</strong> with full backend integration:
+          <ul>
+            <li>
+              Implemented JWT-based authentication and authorization guard, with unauthorized access
+              fallback to a custom <code>NotFound</code> component.
+            </li>
+            <li>
+              Normalized and decoded report/tag data from varying backend response shapes for
+              consistent UI rendering.
+            </li>
+            <li>
+              Implemented dynamic report tag fetching from backend, replacing hardcoded values.
+            </li>
+            <li>
+              Added search, filter, and pagination controls with loading state management.
+            </li>
+            <li>
+              Built an <code>IssueDetailDialog</code> modal component for detailed report viewing with
+              resolve/unresolve actions.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Implemented the <strong>User Consent / Terms of Service page</strong>, enforcing sequential
+          reading of Terms of Service and Privacy Policy before allowing agreement.
+        </li>
+        <li>
+          Updated legal pages (Terms of Service, Privacy Policy) to reflect application rebranding to
+          &quot;ThamRoi&quot;.
+        </li>
+        <li>
+          Identified and resolved a <strong>deployment environment configuration bug</strong> where the
+          frontend was defaulting to <code>localhost:8080</code> instead of the <code>.env</code>
+          -configured backend URL.
+        </li>
+      </ul>
+
+      <ProjectFigure
+        src={adminDashboardImg}
+        alt="Admin dashboard demo"
+        caption="Admin dashboard demo where the data is pulled from the backend."
+      />
+
+      <h2>
+        Backend Development <small>(TypeScript / Node.js / Express / Prisma / PostgreSQL)</small>
+      </h2>
+      <ul>
+        <li>
+          Added <strong>API routing to support the Group Search frontend</strong>, enabling search and
+          filter queries.
+        </li>
+        <li>
+          Diagnosed and fixed <strong>group search routing and filter logic bugs</strong> to restore
+          correct search behavior.
+        </li>
+        <li>
+          Extended the backend to <strong>support the Profile View page</strong>, adapting existing
+          endpoints and data models.
+        </li>
+        <li>
+          Developed the <strong>Blog Post Filter API</strong> endpoint (<code>/api/v2/blog</code>),
+          supporting multi-parameter filtering via query strings.
+        </li>
+        <li>
+          Implemented a <strong>fetch interests API</strong> endpoint, refactoring interests from an
+          enum to a relational database table for flexibility.
+        </li>
+        <li>
+          Refactored the entire <strong>Report system</strong> to support the Admin Dashboard:
+          <ul>
+            <li>
+              Replaced a multi-tag array system with a single <code>reason</code> string mapped to a{' '}
+              <code>report_tag</code> relation (auto-created with &quot;OTHER&quot; fallback).
+            </li>
+            <li>Added a public endpoint to fetch all available report reasons/tags.</li>
+            <li>
+              Implemented <code>is_resolved</code> boolean field across report creation, update, and
+              filtering with validation middleware.
+            </li>
+            <li>
+              Updated type definitions and validation middleware throughout the report module.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Created <strong>database seed scripts</strong> (<code>admin_seed.ts</code>,{' '}
+          <code>report_seed.ts</code>) for test data setup and admin account provisioning.
+        </li>
+      </ul>
+
+      <ProjectFigure
+        src={postmanImg}
+        alt="Postman API demo"
+        caption="Postman API demo showing the backend endpoints for searching blogs."
+      />
+
+      <h2>Code Quality &amp; DevSecOps</h2>
+      <ul>
+        <li>
+          Actively resolved <strong>SonarQube / SonarCloud</strong> static analysis findings, including
+          code smells, duplicate code removal, and unused component cleanup.
+        </li>
+        <li>
+          Applied strict <strong>TypeScript type safety</strong> improvements across backend services,
+          repositories, and middleware.
+        </li>
+        <li>
+          Managed <strong>Prisma schema migrations</strong> to support evolving data models across
+          sprints.
+        </li>
+      </ul>
+
+      <h2>Agile / Team Collaboration</h2>
+      <ul>
+        <li>
+          Delivered features across multiple sprints (Sprint 1 – Sprint 4) following an Agile
+          workflow.
+        </li>
+        <li>
+          Authored detailed <strong>pull request descriptions</strong> to communicate changes clearly
+          to teammates.
+        </li>
+        <li>
+          Proactively identified and communicated <strong>merge conflicts and collaboration issues</strong>{' '}
+          to the team.
+        </li>
+        <li>
+          Authored <strong>17 pull requests</strong> across both repositories, contributing to
+          frontend, backend, bug fixes, and integration work.
+        </li>
+      </ul>
+
+      <h2>Technical Skills Demonstrated</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Technologies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Languages</td>
+            <td>TypeScript, SQL (PostgreSQL)</td>
+          </tr>
+          <tr>
+            <td>Frontend</td>
+            <td>Next.js, React, SCSS</td>
+          </tr>
+          <tr>
+            <td>Backend</td>
+            <td>Node.js, Express.js</td>
+          </tr>
+          <tr>
+            <td>Database</td>
+            <td>PostgreSQL, Prisma ORM</td>
+          </tr>
+          <tr>
+            <td>Auth &amp; Security</td>
+            <td>JWT Authentication, Role-based Authorization</td>
+          </tr>
+          <tr>
+            <td>API Design</td>
+            <td>RESTful API Design, Query Parameter Filtering</td>
+          </tr>
+          <tr>
+            <td>Code Quality</td>
+            <td>SonarQube, SonarCloud</td>
+          </tr>
+          <tr>
+            <td>DevOps</td>
+            <td>Environment Configuration (.env), Infrastructure as Code (HCL/Terraform)</td>
+          </tr>
+          <tr>
+            <td>Version Control</td>
+            <td>Git, GitHub (Pull Requests, Branch Management)</td>
+          </tr>
+          <tr>
+            <td>Methodology</td>
+            <td>Agile / Scrum (multi-sprint delivery)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Sadly, the live website is no longer available due to lack of money :(</p>
+    </>
+  );
+}
