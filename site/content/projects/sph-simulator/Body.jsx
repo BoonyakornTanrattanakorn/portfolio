@@ -1,6 +1,17 @@
-export default function SphSimulatorBody() {
+import { withBase } from '../../../src/utils/paths.js';
+import ProjectFigure from '../../../src/components/ProjectFigure.jsx';
+
+export default function SphSimulatorBody({ base = '/' }) {
+  const gifSrc = withBase('projects/sph-simulator/sph.gif', base);
+
   return (
     <>
+      <ProjectFigure
+        src={gifSrc}
+        alt="Smoothed Particle Hydrodynamics animated fluid simulation demo"
+        caption="Real-time 2D fluid simulation running on the GPU via GLSL compute shaders."
+      />
+
       <h2>Overview</h2>
       <p>
         A real-time 2D fluid simulation built inside Godot 4 using the Smoothed Particle Hydrodynamics (SPH) method.

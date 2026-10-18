@@ -233,7 +233,7 @@ Finish by reporting the branch name, the ordered commits, the verification resul
 - [x] Step 8 — All project narratives
 - [x] Step 9 — Interactive media
 - [x] Step 10 — CV and resume artifacts
-- [ ] Step 11 — Styles, accessibility, and performance
+- [x] Step 11 — Styles, accessibility, and performance
 - [ ] Step 12 — Deployment, documentation, and legacy removal
 - [ ] Step 13 — Final regression checks and handoff
 

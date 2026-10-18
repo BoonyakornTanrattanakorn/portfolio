@@ -43,6 +43,8 @@ export default function Card({
           className="card-thumb"
           src={thumbnailSrc}
           alt={`${title} thumbnail`}
+          width="300"
+          height="140"
           loading="lazy"
           onError={() => setImageError(true)}
         />

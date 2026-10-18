@@ -155,6 +155,8 @@ describe('Project Case Studies and Narratives', () => {
           <ProjectDetailPage slug="sph-simulator" {...meta} base="/portfolio/" />
         </ThemeProvider>
       );
+      expect(html).toContain('src="/portfolio/projects/sph-simulator/sph-poster.png"');
+      expect(html).toContain('src="/portfolio/projects/sph-simulator/sph.gif"');
       expect(html).toContain('Density pass');
       expect(html).toContain('Force pass');
       expect(html).toContain('Integration pass');

@@ -32,37 +32,42 @@ export default function ProjectLayout({
     thumbnail && !imgError ? thumbnail : THUMBNAIL_PLACEHOLDER;
 
   return (
-    <div className="wrap">
-      <a className="back" href={withBase('projects.html', base)}>
-        ← Back to Portfolio
+    <>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
       </a>
-      <h1 id="project-title">{title}</h1>
-      <div id="project-meta" className="meta">
-        {metaParts.join(' \u00a0·\u00a0 ')}
-      </div>
-      {tags.length > 0 && (
-        <div id="project-tags" className="tags">
-          {tags.map((tag) => (
-            <span key={tag} className="tag">
-              {tag}
-            </span>
-          ))}
+      <main id="main-content" className="wrap" tabIndex="-1">
+        <a className="back" href={withBase('projects.html', base)}>
+          ← Back to Portfolio
+        </a>
+        <h1 id="project-title">{title}</h1>
+        <div id="project-meta" className="meta">
+          {metaParts.join(' \u00a0·\u00a0 ')}
         </div>
-      )}
+        {tags.length > 0 && (
+          <div id="project-tags" className="tags">
+            {tags.map((tag) => (
+              <span key={tag} className="tag">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
-      <figure className="inbody-figure">
-        <img
-          id="project-thumb"
-          className="inbody-img thumbnail"
-          src={thumbSrc}
-          alt={summary || title || 'Project thumbnail'}
-          loading="lazy"
-          onError={() => setImgError(true)}
-        />
-        {summary && <figcaption id="project-thumb-caption">{summary}</figcaption>}
-      </figure>
+        <figure className="inbody-figure">
+          <img
+            id="project-thumb"
+            className="inbody-img thumbnail"
+            src={thumbSrc}
+            alt={summary || title || 'Project thumbnail'}
+            loading="lazy"
+            onError={() => setImgError(true)}
+          />
+          {summary && <figcaption id="project-thumb-caption">{summary}</figcaption>}
+        </figure>
 
-      <div className="body">{children}</div>
-    </div>
+        <div className="body">{children}</div>
+      </main>
+    </>
   );
 }

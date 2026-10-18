@@ -4,6 +4,6 @@
   "date": "2025",
   "organization": "Personal Project",
   "tags": ["Godot", "GLSL", "GDScript", "Simulation"],
-  "thumbnail": "sph.gif",
+  "thumbnail": "sph-poster.png",
   "summary": "Real-time 2D fluid simulator in Godot using SPH; GPU-accelerated density and pressure computation via GLSL compute shaders."
 }
