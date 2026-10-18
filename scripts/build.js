@@ -157,6 +157,10 @@ async function runBuild() {
         } catch (e) {}
       })();
     </script>
+    <script>
+      self.ModelViewerElement = self.ModelViewerElement || {};
+      self.ModelViewerElement.meshoptDecoderLocation = '${withBase('assets/vendor/meshopt_decoder.js', base)}';
+    </script>
     ${cssTags}
   </head>
   <body>
@@ -256,7 +260,7 @@ async function runBuild() {
   // Copy vendor decoder script
   const vendorDist = path.join(distDir, 'assets', 'vendor');
   fs.mkdirSync(vendorDist, { recursive: true });
-  const meshoptSrc = path.join(root, 'node_modules', 'meshoptimizer', 'meshopt_decoder.mjs');
+  const meshoptSrc = path.join(root, 'node_modules', 'meshoptimizer', 'meshopt_decoder.cjs');
   if (fs.existsSync(meshoptSrc)) {
     fs.copyFileSync(meshoptSrc, path.join(vendorDist, 'meshopt_decoder.js'));
   }

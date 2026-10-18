@@ -36,6 +36,17 @@ function devStaticAssetsPlugin() {
           }
         }
 
+        // Meshopt decoder vendor script
+        if (cleanPath === '/assets/vendor/meshopt_decoder.js') {
+          const vendorPath = fs.existsSync(path.resolve('site/assets/vendor/meshopt_decoder.js'))
+            ? path.resolve('site/assets/vendor/meshopt_decoder.js')
+            : path.resolve('node_modules/meshoptimizer/meshopt_decoder.cjs');
+          if (fs.existsSync(vendorPath)) {
+            res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+            return fs.createReadStream(vendorPath).pipe(res);
+          }
+        }
+
         // Assets (e.g. /assets/avatar.jpg, /assets/css/styles.css)
         if (cleanPath.startsWith('/assets/')) {
           const filePath = path.resolve('site' + cleanPath);
@@ -86,6 +97,7 @@ function devStaticAssetsPlugin() {
 export default defineConfig({
   plugins: [react(), devStaticAssetsPlugin()],
   optimizeDeps: {
+    entries: ['index.html'],
     include: ['@google/model-viewer', 'meshoptimizer/decoder'],
   },
   test: {

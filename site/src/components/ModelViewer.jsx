@@ -7,21 +7,27 @@ export async function initModelViewer(base = '/') {
   if (typeof window === 'undefined') return;
   if (!modelViewerPromise) {
     modelViewerPromise = (async () => {
+      const decoderUrl = withBase('assets/vendor/meshopt_decoder.js', base);
+
+      // Pre-configure global ModelViewerElement before module loads and element constructor runs
+      self.ModelViewerElement = self.ModelViewerElement || {};
+      self.ModelViewerElement.meshoptDecoderLocation = decoderUrl;
+
       try {
         const { MeshoptDecoder } = await import('meshoptimizer/decoder');
+        await MeshoptDecoder.ready;
         window.MeshoptDecoder = MeshoptDecoder;
         self.MeshoptDecoder = MeshoptDecoder;
       } catch (err) {
-        console.warn('MeshoptDecoder import failed:', err);
+        // Fallback to script load from decoderUrl
       }
 
       await import('@google/model-viewer');
 
       if (typeof window !== 'undefined' && window.customElements) {
-        const ModelViewerElement = window.customElements.get('model-viewer');
+        const ModelViewerElement = window.customElements.get('model-viewer') || window.ModelViewerElement;
         if (ModelViewerElement) {
-          self.ModelViewerElement = self.ModelViewerElement || {};
-          self.ModelViewerElement.meshoptDecoderLocation = withBase('assets/vendor/meshopt_decoder.js', base);
+          ModelViewerElement.meshoptDecoderLocation = decoderUrl;
         }
       }
     })();

@@ -128,6 +128,22 @@ describe('dev mode and client-side routing resolution', () => {
       expect(res.headers.get('content-type')).toContain('image/svg+xml');
     });
 
+    it('serves meshopt decoder vendor script with application/javascript content type', async () => {
+      const res = await fetch(`http://localhost:${devPort}/assets/vendor/meshopt_decoder.js`);
+      expect(res.status).toBe(200);
+      expect(res.headers.get('content-type')).toContain('application/javascript');
+      const text = await res.text();
+      expect(text).toContain('MeshoptDecoder');
+    });
+
+    it('serves meshopt decoder vendor script under /portfolio/ base prefix', async () => {
+      const res = await fetch(`http://localhost:${devPort}/portfolio/assets/vendor/meshopt_decoder.js`);
+      expect(res.status).toBe(200);
+      expect(res.headers.get('content-type')).toContain('application/javascript');
+      const text = await res.text();
+      expect(text).toContain('MeshoptDecoder');
+    });
+
     it('falls back to index.html for page routes in dev server', async () => {
       const res = await fetch(`http://localhost:${devPort}/projects.html`);
       expect(res.status).toBe(200);

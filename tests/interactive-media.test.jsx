@@ -1,12 +1,14 @@
 import { describe, it, expect, vi } from 'vitest';
 import { renderToString } from 'react-dom/server';
-import ModelViewer, { isWebGLAvailable, isReducedMotionPreferred } from '../site/src/components/ModelViewer.jsx';
+import ModelViewer, { initModelViewer, isWebGLAvailable, isReducedMotionPreferred } from '../site/src/components/ModelViewer.jsx';
 import VideoEmbed from '../site/src/components/VideoEmbed.jsx';
 import CursrIvBody from '../site/content/projects/cursr-iv/Body.jsx';
 import AutomatedMeasuringEquipmentBody from '../site/content/projects/automated-measuring-equipment/Body.jsx';
 import EmatchIgnitionModuleBody from '../site/content/projects/ematch-ignition-module/Body.jsx';
 import FpgaVideoPlayerBody from '../site/content/projects/fpga-video-player/Body.jsx';
 import SphSimulatorBody from '../site/content/projects/sph-simulator/Body.jsx';
+
+vi.mock('@google/model-viewer', () => ({}));
 
 describe('Interactive Media Components', () => {
   describe('ModelViewer Component', () => {
@@ -41,6 +43,26 @@ describe('Interactive Media Components', () => {
       // In Node environment, window is undefined
       expect(isWebGLAvailable()).toBe(true);
       expect(isReducedMotionPreferred()).toBe(false);
+    });
+
+    it('configures meshoptDecoderLocation when initializing model-viewer', async () => {
+      const originalWindow = globalThis.window;
+      const originalSelf = globalThis.self;
+      try {
+        const mockModelViewerClass = class {};
+        globalThis.window = {
+          customElements: {
+            get: vi.fn(() => mockModelViewerClass),
+          },
+        };
+        globalThis.self = globalThis.window;
+        await initModelViewer('/portfolio/');
+        expect(globalThis.self.ModelViewerElement.meshoptDecoderLocation).toBe('/portfolio/assets/vendor/meshopt_decoder.js');
+        expect(mockModelViewerClass.meshoptDecoderLocation).toBe('/portfolio/assets/vendor/meshopt_decoder.js');
+      } finally {
+        globalThis.window = originalWindow;
+        globalThis.self = originalSelf;
+      }
     });
   });
 
