@@ -13,7 +13,7 @@ cv:
         end_date: present
         location: Bangkok, Thailand
         highlights:
-          - 'GPA: 3.91/4.00'
+          - 'GPA: 3.93/4.00'
           - '**Relevant Coursework**: Embedded System Laboratory (A), Computer Networks I (A), Operating Systems and Programs (A), Hardware Synthesis Laboratory (A), Software Engineering (A), Introduction to Robotics (A), Database Systems (A)'
     experience:
       - company: Ivory Electronics Co. Ltd.
@@ -44,18 +44,18 @@ cv:
         date: '2026'
         summary: Chulalongkorn University High Altitude Research Club | Head of Avionics
         highlights:
-          - Architected multi-threaded **FreeRTOS** firmware in **C++** with a deterministic state machine managing real-time task scheduling and sensor acquisition rates (1 Hz to 100 Hz).
+          - Developed multi-threaded **FreeRTOS** firmware in **C++** with a deterministic state machine managing real-time task scheduling and sensor acquisition rates (1 Hz to 100 Hz).
           - Designed a 2-layer **KiCad PCB** integrating power rail monitoring, peripheral power switching, and SPI/I2C sensor buses.
           - Implemented fault-tolerant error handling, hardware watchdog recovery, and high-reliability data serialization.
     technical_skills:
       - label: Embedded Systems
-        details: CAN Bus (2.0A/B, Multi-Slave Networks), ESP32-S3, STM32, FreeRTOS, PWM Pump/Motor Control, ADC/Sensors, UART/SPI/I2C
+        details: CAN Bus Architecture, ESP32-S3, STM32, FreeRTOS, ADC/Sensors, UART/SPI/I2C
       - label: Networking & IoT
-        details: Wi-Fi, Ethernet, MQTT, TCP/IP, POS/Host System Integration, Binary Packet Protocols & Checksum
-      - label: Hardware & Tools
-        details: KiCad (Schematic & Multi-layer PCB), MOSFET Switching & Inductive Protection, Logic Analyzers, Oscilloscopes, Onshape CAD
-      - label: Programming & Languages
-        details: 'C, C++, Python, TypeScript, JavaScript; Thai (Native), English (IELTS 7.5)'
+        details: Wi-Fi, Ethernet, MQTT, TCP/IP
+      - label: CAD
+        details: KiCad, Onshape
+      - label: Programming Languages
+        details: 'C, C++, Python, Java'
 design:
   theme: engineeringresumes
   page:

@@ -13,7 +13,7 @@ cv:
         end_date: present
         location: Bangkok, Thailand
         highlights:
-          - 'GPA: 3.91/4.00'
+          - 'GPA: 3.93/4.00'
           - '**Relevant Coursework**: Computer Programming (A), Introduction to Data Structures (A), Operating Systems and Programs (A), Database Systems (A), Algorithm Design (A), Hardware Synthesis Laboratory (A),
             Embedded System Laboratory (A), Software Engineering (A), Introduction to Robotics (A), Computer Networks I (A)'
     experience:
@@ -102,7 +102,7 @@ cv:
       - label: Embedded Systems
         details: Integrated Circuits, SMT, PCB Design & Assembly, STM32 & ESP32 Programming, FPGA Programming, FreeRTOS, CAN Bus
       - label: Programming
-        details: Python, C, C#, C++, Java, Verilog, TypeScript, JavaScript
+        details: Python, C, C++, Java, Verilog
       - label: CAD
         details: Fusion 360, KiCad, Onshape
       - label: Languages
