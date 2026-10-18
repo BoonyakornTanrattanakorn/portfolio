@@ -127,7 +127,7 @@ Beneath base `/portfolio/` (production) or `/` (local):
 - [x] **Step 6:** About and Profile ported (HomePage and ProfilePage ported, build-time skills aggregation rendered directly in initial HTML without fetch waterfall or innerHTML, local avatar image stored at site/assets/avatar.jpg, stable absolute social image URLs).
 - [x] **Step 7:** Collections ported and error handling fixed (shared Card, CollectionControls, CollectionGrid components, pure reactive search/tag/sort filtering, aria-pressed on filter tags, live region announcement, image error fallbacks, status badges with archived styling, separated item and collection error states that are never erased by empty results, 58 tests passing).
 - [x] **Step 8:** Project article structure and all narratives ported (all 9 project case study bodies converted to readable JSX modules in site/content/projects/, shared ProjectLayout with SVG placeholder and image error fallback, ProjectFigure component, cross-project links with base path support, preformatted code, tables, equations, initial static HTML prerendered for all 9 projects, 77 tests passing).
-- [ ] **Step 9:** Interactive media integrated (3D models, lazy loading, YouTube).
+- [x] **Step 9:** Interactive media integrated (lazy on-demand @google/model-viewer wrapper in ModelViewer.jsx, meshoptimizer decoder copied and self-hosted locally without external CDNs, WebGL capability check with graceful fallback, reduced-motion autoRotate suppression, responsive VideoEmbed component for FPGA demo, 85 tests passing).
 - [ ] **Step 10:** CV and resume artifacts integrated.
 - [ ] **Step 11:** Styles consolidated, accessibility and media performance improved.
 - [ ] **Step 12:** Deployment updated and legacy frontend retired.

@@ -1,22 +1,23 @@
 import { withBase } from '../../../src/utils/paths.js';
+import ModelViewer from '../../../src/components/ModelViewer.jsx';
 
 export default function CursrIvBody({ base = '/' }) {
   const modelSrc = withBase('projects/cursr-iv/FC.glb', base);
 
   return (
     <>
-      <model-viewer
+      <ModelViewer
         src={modelSrc}
         alt="CURSR-IV flight computer PCB"
-        camera-controls=""
-        auto-rotate=""
+        cameraControls={true}
+        autoRotate={true}
         style={{
           width: '100%',
           height: '400px',
           borderRadius: '10px',
           background: '#e2e4e8',
-          display: 'block',
         }}
+        base={base}
       />
 
       <h2>Overview</h2>

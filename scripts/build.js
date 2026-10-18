@@ -247,6 +247,14 @@ async function runBuild() {
     }
   }
 
+  // Copy vendor decoder script
+  const vendorDist = path.join(distDir, 'assets', 'vendor');
+  fs.mkdirSync(vendorDist, { recursive: true });
+  const meshoptSrc = path.join(root, 'node_modules', 'meshoptimizer', 'meshopt_decoder.mjs');
+  if (fs.existsSync(meshoptSrc)) {
+    fs.copyFileSync(meshoptSrc, path.join(vendorDist, 'meshopt_decoder.js'));
+  }
+
   // 9. Clean up SSR bundle directory
   console.log('8. Cleaning up temporary SSR bundle...');
   fs.rmSync(ssrDir, { recursive: true, force: true });

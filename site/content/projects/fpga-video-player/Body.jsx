@@ -1,3 +1,5 @@
+import VideoEmbed from '../../../src/components/VideoEmbed.jsx';
+
 export default function FpgaVideoPlayerBody() {
   return (
     <>
@@ -9,28 +11,12 @@ export default function FpgaVideoPlayerBody() {
       </p>
 
       <h2>Demo</h2>
-      <div className="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/p0MyfT0LiCs"
-          title="FPGA Video Demo"
-          allowFullScreen
-        />
-      </div>
-      <p className="demo-note">
-        Final project for 2110363 Hardware Synthesis Lab I, Chulalongkorn University. Video frames are
-        320×240 pixels at 12-bit colour stored as raw frames on the SD card and read over SPI (50 MHz).
-        Output is driven over VGA; recorded playback was slightly sped up to match the original music video.
-      </p>
-      <p>
-        Watch on YouTube:{' '}
-        <a
-          href="https://www.youtube.com/watch?v=p0MyfT0LiCs"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          https://www.youtube.com/watch?v=p0MyfT0LiCs
-        </a>
-      </p>
+      <VideoEmbed
+        src="https://www.youtube.com/embed/p0MyfT0LiCs"
+        title="FPGA Video Demo"
+        explanatoryText="Final project for 2110363 Hardware Synthesis Lab I, Chulalongkorn University. Video frames are 320×240 pixels at 12-bit colour stored as raw frames on the SD card and read over SPI (50 MHz). Output is driven over VGA; recorded playback was slightly sped up to match the original music video."
+        watchUrl="https://www.youtube.com/watch?v=p0MyfT0LiCs"
+      />
 
       <h2>Key Features</h2>
       <ul>

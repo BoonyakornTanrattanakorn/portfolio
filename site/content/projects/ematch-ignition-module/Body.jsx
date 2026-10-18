@@ -1,5 +1,6 @@
 import { withBase } from '../../../src/utils/paths.js';
 import ProjectFigure from '../../../src/components/ProjectFigure.jsx';
+import ModelViewer from '../../../src/components/ModelViewer.jsx';
 
 export default function EmatchIgnitionModuleBody({ base = '/' }) {
   const modelSrc = withBase('projects/ematch-ignition-module/ignition_module.glb', base);
@@ -9,23 +10,23 @@ export default function EmatchIgnitionModuleBody({ base = '/' }) {
 
   return (
     <>
-      <model-viewer
+      <ModelViewer
         src={modelSrc}
         alt="3D interactive model of the XSRT E-Match Ignition Module PCB"
-        camera-controls=""
-        auto-rotate=""
-        camera-orbit="0deg 75deg 105%"
-        min-camera-orbit="auto auto 10%"
-        max-camera-orbit="auto auto 300%"
-        shadow-intensity="1"
+        cameraControls={true}
+        autoRotate={true}
+        cameraOrbit="0deg 75deg 105%"
+        minCameraOrbit="auto auto 10%"
+        maxCameraOrbit="auto auto 300%"
+        shadowIntensity={1}
         style={{
           width: '100%',
           height: '420px',
           borderRadius: '10px',
           background: 'var(--border)',
           margin: '16px 0 24px',
-          display: 'block',
         }}
+        base={base}
       />
 
       <h2>Overview</h2>
