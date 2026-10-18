@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.6/schema.json
+cv:
+  name: Boonyakorn Tanrattanakorn
+  location: Nonthaburi, Thailand
+  email: boonyakorn.tan@gmail.com
+  phone: tel:+66-89-926-2211
+  sections:
+    education:
+      - institution: Chulalongkorn University
+        area: Computer Engineering
+        degree: BE
+        start_date: 2023-09
+        end_date: present
+        location: Bangkok, Thailand
+        highlights:
+          - 'GPA: 3.91/4.00'
+          - '**Relevant Coursework**: Embedded System Laboratory (A), Computer Networks I (A), Operating Systems and Programs (A), Hardware Synthesis Laboratory (A), Software Engineering (A), Introduction to Robotics (A), Database Systems (A)'
+    experience:
+      - company: Ivory Electronics Co. Ltd.
+        position: Embedded System Engineer Intern
+        start_date: 2026-06
+        end_date: present
+        location: Thailand
+        highlights:
+          - Architected a modular firmware stack (driver → manager → state machine → UI) for an electrochemical instrument, controlling power delivery and sampling fluid properties via **ADC**.
+          - Diagnosed hardware reference IC drift; implemented digital **median and low-pass filtering** to stabilise real-time sensor measurements.
+          - Designed a 3D-printed instrument enclosure and cable harness layout in **Onshape**, ensuring fluid isolation and thermal dissipation.
+    projects:
+      - name: Dual-Channel CAN Slave Actuator Module
+        date: '2026'
+        summary: CUHAR / XSRT | Hardware & Embedded Systems Engineer
+        highlights:
+          - Developed embedded firmware on **STM32 (C++)** operating as a slave node over a 500 kbit/s **CAN bus**, decoding host dispatch commands and reporting actuator telemetry.
+          - Designed a custom **PCB** in **KiCad** with low-side MOSFET switching stages for driving high-current inductive loads, incorporating hardware safety interlocks.
+          - Diagnosed and mitigated inductive voltage spikes damaging MOSFET gates using thermal imaging, snubber circuits, and transient suppression.
+      - name: ESP32-S3 IoT Fluid Monitoring & Actuator Controller
+        date: '2025'
+        summary: Embedded System Lab, Chulalongkorn University | Embedded Systems Developer
+        highlights:
+          - Implemented **ESP32-S3** firmware utilizing hardware **PWM** timers for precise pump and motor actuation cycles.
+          - Interfaced water level and environmental sensors via **ADC** and digital buses, continuously tracking fluid status.
+          - Built networked host telemetry over **Wi-Fi / Ethernet** to an **MQTT** broker and engineered a framed binary packet protocol with checksum validation.
+      - name: Aircraft Monitoring & Instrumentation (AMIv2)
+        date: '2026'
+        summary: Chulalongkorn University High Altitude Research Club | Head of Avionics
+        highlights:
+          - Architected multi-threaded **FreeRTOS** firmware in **C++** with a deterministic state machine managing real-time task scheduling and sensor acquisition rates (1 Hz to 100 Hz).
+          - Designed a 2-layer **KiCad PCB** integrating power rail monitoring, peripheral power switching, and SPI/I2C sensor buses.
+          - Implemented fault-tolerant error handling, hardware watchdog recovery, and high-reliability data serialization.
+    technical_skills:
+      - label: Embedded Systems
+        details: CAN Bus (2.0A/B, Multi-Slave Networks), ESP32-S3, STM32, FreeRTOS, PWM Pump/Motor Control, ADC/Sensors, UART/SPI/I2C
+      - label: Networking & IoT
+        details: Wi-Fi, Ethernet, MQTT, TCP/IP, POS/Host System Integration, Binary Packet Protocols & Checksum
+      - label: Hardware & Tools
+        details: KiCad (Schematic & Multi-layer PCB), MOSFET Switching & Inductive Protection, Logic Analyzers, Oscilloscopes, Onshape CAD
+      - label: Programming & Languages
+        details: 'C, C++, Python, TypeScript, JavaScript; Thai (Native), English (IELTS 7.5)'
+design:
+  theme: engineeringresumes
+  page:
+    top_margin: 0.5in
+    bottom_margin: 0.5in
+    left_margin: 0.5in
+    right_margin: 0.5in
+    show_footer: false
+  section_titles:
+    space_above: 0.35cm
+    space_below: 0.15cm
+  sections:
+    space_between_regular_entries: 0.25cm
+    space_between_text_based_entries: 0.12cm
+locale:
+  language: english
+settings:
+  current_date: '2026-10-18'
+  render_command:
+    typst_path: DrinkStation_resume/Boonyakorn_Tanrattanakorn_DrinkStation_resume.typ
+    pdf_path: DrinkStation_resume/Boonyakorn_Tanrattanakorn_DrinkStation_resume.pdf
+    markdown_path: DrinkStation_resume/Boonyakorn_Tanrattanakorn_DrinkStation_resume.md
+    html_path: DrinkStation_resume/Boonyakorn_Tanrattanakorn_DrinkStation_resume.html
+    dont_generate_png: true

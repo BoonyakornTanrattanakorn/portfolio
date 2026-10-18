@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        
+    </title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css"
+        integrity="sha512-Pmhg2i/F7+5+7SsdoUqKeH7UAZoVMYb1sxGOoJ0jWXAEHP0XV2H4CITyK267eHWp2jpj7rtqWNkmEOw1tNyYpg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.12/dist/katex.min.css" integrity="sha384-PDbUeNCuE6bOPudPOgFyIUEy3UJawJVwr3XlGO90FIuf5qNIoTLSgOJo/dC2ZXV/" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.12/dist/katex.min.js" integrity="sha384-VkqWq8xtm5YQk1BBXczQ8/Sx+DlCzF8cuS43bZwmtVXzRFtyLTqTCdP7MKmKo+KN" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.12/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {delimiters: [{ left: '$$',  right: '$$',  display: false }]});"></script>
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <article class="markdown-body">
+        <h1>Boonyakorn Tanrattanakorn's CV</h1>
+        <ul>
+        <li>Phone: +66 89 926 2211</li>
+        <li>Email: <a href="mailto:boonyakorn.tan@gmail.com">boonyakorn.tan@gmail.com</a></li>
+        <li>Location: Nonthaburi, Thailand</li>
+        </ul>
+        <h1>Education</h1>
+        <h2><strong>Chulalongkorn University</strong>, BE in Computer Engineering -- Bangkok, ThailandSept 2023 – present</h2>
+        <ul>
+        <li>
+        <p>GPA: 3.91/4.00</p>
+        </li>
+        <li>
+        <p><strong>Relevant Coursework</strong>: Embedded System Laboratory (A), Computer Networks I (A), Operating Systems and Programs (A), Hardware Synthesis Laboratory (A), Software Engineering (A), Introduction to Robotics (A), Database Systems (A)</p>
+        </li>
+        </ul>
+        <h1>Experience</h1>
+        <h2><strong>Embedded System Engineer Intern</strong>, Ivory Electronics Co. Ltd. -- Thailand</h2>
+        <p>June 2026 – present</p>
+        <ul>
+        <li>
+        <p>Architected a modular firmware stack (driver → manager → state machine → UI) for an electrochemical instrument, controlling power delivery and sampling fluid properties via <strong>ADC</strong>.</p>
+        </li>
+        <li>
+        <p>Diagnosed hardware reference IC drift; implemented digital <strong>median and low-pass filtering</strong> to stabilise real-time sensor measurements.</p>
+        </li>
+        <li>
+        <p>Designed a 3D-printed instrument enclosure and cable harness layout in <strong>Onshape</strong>, ensuring fluid isolation and thermal dissipation.</p>
+        </li>
+        </ul>
+        <h1>Projects</h1>
+        <h2><strong>Dual-Channel CAN Slave Actuator Module</strong></h2>
+        <p>Jan 2026</p>
+        <p>CUHAR / XSRT | Hardware &amp; Embedded Systems Engineer</p>
+        <ul>
+        <li>
+        <p>Developed embedded firmware on <strong>STM32 (C++)</strong> operating as a slave node over a 500 kbit/s <strong>CAN bus</strong>, decoding host dispatch commands and reporting actuator telemetry.</p>
+        </li>
+        <li>
+        <p>Designed a custom <strong>PCB</strong> in <strong>KiCad</strong> with low-side MOSFET switching stages for driving high-current inductive loads, incorporating hardware safety interlocks.</p>
+        </li>
+        <li>
+        <p>Diagnosed and mitigated inductive voltage spikes damaging MOSFET gates using thermal imaging, snubber circuits, and transient suppression.</p>
+        </li>
+        </ul>
+        <h2><strong>ESP32-S3 IoT Fluid Monitoring &amp; Actuator Controller</strong></h2>
+        <p>Jan 2025</p>
+        <p>Embedded System Lab, Chulalongkorn University | Embedded Systems Developer</p>
+        <ul>
+        <li>
+        <p>Implemented <strong>ESP32-S3</strong> firmware utilizing hardware <strong>PWM</strong> timers for precise pump and motor actuation cycles.</p>
+        </li>
+        <li>
+        <p>Interfaced water level and environmental sensors via <strong>ADC</strong> and digital buses, continuously tracking fluid status.</p>
+        </li>
+        <li>
+        <p>Built networked host telemetry over <strong>Wi-Fi / Ethernet</strong> to an <strong>MQTT</strong> broker and engineered a framed binary packet protocol with checksum validation.</p>
+        </li>
+        </ul>
+        <h2><strong>Aircraft Monitoring &amp; Instrumentation (AMIv2)</strong></h2>
+        <p>Jan 2026</p>
+        <p>Chulalongkorn University High Altitude Research Club | Head of Avionics</p>
+        <ul>
+        <li>
+        <p>Architected multi-threaded <strong>FreeRTOS</strong> firmware in <strong>C++</strong> with a deterministic state machine managing real-time task scheduling and sensor acquisition rates (1 Hz to 100 Hz).</p>
+        </li>
+        <li>
+        <p>Designed a 2-layer <strong>KiCad PCB</strong> integrating power rail monitoring, peripheral power switching, and SPI/I2C sensor buses.</p>
+        </li>
+        <li>
+        <p>Implemented fault-tolerant error handling, hardware watchdog recovery, and high-reliability data serialization.</p>
+        </li>
+        </ul>
+        <h1>Technical Skills</h1>
+        <p><strong>Embedded Systems:</strong> CAN Bus (2.0A/B, Multi-Slave Networks), ESP32-S3, STM32, FreeRTOS, PWM Pump/Motor Control, ADC/Sensors, UART/SPI/I2C</p>
+        <p><strong>Networking &amp; IoT:</strong> Wi-Fi, Ethernet, MQTT, TCP/IP, POS/Host System Integration, Binary Packet Protocols &amp; Checksum</p>
+        <p><strong>Hardware &amp; Tools:</strong> KiCad (Schematic &amp; Multi-layer PCB), MOSFET Switching &amp; Inductive Protection, Logic Analyzers, Oscilloscopes, Onshape CAD</p>
+        <p><strong>Programming &amp; Languages:</strong> C, C++, Python, TypeScript, JavaScript; Thai (Native), English (IELTS 7.5)</p>
+    </article>
+</body>
+
+</html>
