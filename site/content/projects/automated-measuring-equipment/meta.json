@@ -1,0 +1,9 @@
+{
+  "title": "AMIv2 — Aircraft Monitoring & Instrumentation",
+  "role": "Head of Avionics",
+  "date": "2026",
+  "organization": "Chulalongkorn University High Altitude Research Club",
+  "tags": ["STM32", "FreeRTOS", "C++", "KiCad", "PCB", "Embedded"],
+  "thumbnail": "",
+  "summary": "Designed a 2-layer STM32 board and FreeRTOS firmware that measures power, motion, altitude, and GPS in flight, computes a real-time competition score, and logs to SD for the Air Cargo Challenge 2026."
+}

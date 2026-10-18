@@ -1,0 +1,11 @@
+{
+  "title": "ACC 2026 Flight Telemetry Dashboard",
+  "url": "https://boonyakorntanrattanakorn.github.io/ACC26FlightDataVisualization/",
+  "role": "Full-Stack Developer",
+  "date": "2026",
+  "organization": "Personal Project",
+  "status": "live",
+  "tags": ["JavaScript", "Three.js", "Chart.js", "Python", "pandas", "GitHub Pages"],
+  "thumbnail": "ACC26FlightDataVisualization.png",
+  "summary": "Browse Air Cargo Challenge 2026 standings and flight logs, and replay any recorded flight in 3D with altitude and speed charts."
+}

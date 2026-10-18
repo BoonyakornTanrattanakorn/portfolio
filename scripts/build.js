@@ -5,6 +5,7 @@ import { build } from 'vite';
 import { MAIN_PAGES, getProjectPages } from '../site/src/pages.js';
 import { normalizeBasePath, withBase } from '../site/src/utils/paths.js';
 import { escapeHtml, escapeJsonForScript } from '../site/src/utils/html.js';
+import { validateAllContent } from '../site/src/content/validate.js';
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -39,9 +40,21 @@ async function runBuild() {
   const root = process.cwd();
   const distDir = path.join(root, 'dist');
   const ssrDir = path.join(root, 'dist-ssr');
+  const contentDir = path.join(root, 'site', 'content');
 
-  // 1. Build client assets with Vite
-  console.log('1. Building client bundle...');
+  // 1. Validate content before building
+  console.log('1. Validating canonical content...');
+  const validation = validateAllContent({ rootDir: root });
+  if (!validation.valid) {
+    console.error('Content validation failed:');
+    for (const err of validation.errors) {
+      console.error(` - ${err}`);
+    }
+    process.exit(1);
+  }
+
+  // 2. Build client assets with Vite
+  console.log('2. Building client bundle...');
   await build({
     base,
     build: {
@@ -58,8 +71,8 @@ async function runBuild() {
   const cssTags = cssMatches.join('\n    ');
   const scriptTags = scriptMatches.join('\n    ');
 
-  // 2. Build SSR bundle with Vite
-  console.log('2. Building SSR bundle...');
+  // 3. Build SSR bundle with Vite
+  console.log('3. Building SSR bundle...');
   await build({
     base,
     build: {
@@ -69,30 +82,25 @@ async function runBuild() {
     },
   });
 
-  // 3. Load SSR bundle
+  // 4. Load SSR bundle
   const ssrEntryPath = path.join(ssrDir, 'entry-server.js');
   const { renderPage } = await import(pathToFileURL(ssrEntryPath).href);
 
-  // 4. Gather pages
-  console.log('3. Gathering page manifest...');
-  const projectsManifestPath = path.join(root, 'site', 'projects', 'projects.json');
-  let projectsList = [];
-  if (fs.existsSync(projectsManifestPath)) {
-    const rawSlugs = JSON.parse(fs.readFileSync(projectsManifestPath, 'utf8'));
-    projectsList = rawSlugs.map((slug) => {
-      const metaPath = path.join(root, 'site', 'projects', slug, 'meta.json');
-      if (fs.existsSync(metaPath)) {
-        const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
-        return { slug, title: meta.title, summary: meta.summary };
-      }
-      return { slug, title: slug, summary: '' };
-    });
-  }
+  // 5. Gather pages from canonical content
+  console.log('4. Gathering canonical page manifest...');
+  const projectsManifestPath = path.join(contentDir, 'projects.json');
+  const rawSlugs = JSON.parse(fs.readFileSync(projectsManifestPath, 'utf8'));
+  const projectsList = rawSlugs.map((slug) => {
+    const metaPath = path.join(contentDir, 'projects', slug, 'meta.json');
+    const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+    return { slug, ...meta };
+  });
+
   const projectPages = getProjectPages(projectsList);
   const allPages = [...MAIN_PAGES, ...projectPages];
 
-  // 5. Prerender each page
-  console.log(`4. Prerendering ${allPages.length} pages...`);
+  // 6. Prerender each page
+  console.log(`5. Prerendering ${allPages.length} pages...`);
   for (const page of allPages) {
     const { html } = renderPage({
       componentKey: page.componentKey,
@@ -149,14 +157,36 @@ async function runBuild() {
     fs.writeFileSync(destPath, finalHtml, 'utf8');
   }
 
-  // 6. Copy static assets and CV documents
-  console.log('5. Copying public assets and CV documents...');
+  // 7. Generate compatibility JSON endpoints at existing public manifest/metadata paths
+  console.log('6. Generating compatibility JSON endpoints in dist/...');
+  fs.mkdirSync(path.join(distDir, 'projects'), { recursive: true });
+  fs.copyFileSync(projectsManifestPath, path.join(distDir, 'projects', 'projects.json'));
+  for (const p of projectsList) {
+    const slug = p.slug;
+    const metaDest = path.join(distDir, 'projects', slug, 'meta.json');
+    fs.mkdirSync(path.dirname(metaDest), { recursive: true });
+    const metaSrc = path.join(contentDir, 'projects', slug, 'meta.json');
+    fs.copyFileSync(metaSrc, metaDest);
+  }
+
+  const websitesManifestPath = path.join(contentDir, 'websites.json');
+  fs.mkdirSync(path.join(distDir, 'websites'), { recursive: true });
+  fs.copyFileSync(websitesManifestPath, path.join(distDir, 'websites', 'websites.json'));
+  const websiteIds = JSON.parse(fs.readFileSync(websitesManifestPath, 'utf8'));
+  for (const id of websiteIds) {
+    const metaDest = path.join(distDir, 'websites', id, 'meta.json');
+    fs.mkdirSync(path.dirname(metaDest), { recursive: true });
+    const metaSrc = path.join(contentDir, 'websites', id, 'meta.json');
+    fs.copyFileSync(metaSrc, metaDest);
+  }
+
+  // 8. Copy public assets and CV documents
+  console.log('7. Copying public assets and CV documents...');
   const faviconSrc = path.join(root, 'site', 'favicon.svg');
   if (fs.existsSync(faviconSrc)) {
     fs.copyFileSync(faviconSrc, path.join(distDir, 'favicon.svg'));
   }
 
-  // Copy CV directory
   const cvDest = path.join(distDir, 'CV');
   fs.mkdirSync(cvDest, { recursive: true });
   const cvHtmlSrc = path.join(root, 'CV', 'Boonyakorn_Tanrattanakorn_CV.html');
@@ -164,7 +194,6 @@ async function runBuild() {
   if (fs.existsSync(cvHtmlSrc)) fs.copyFileSync(cvHtmlSrc, path.join(cvDest, 'Boonyakorn_Tanrattanakorn_CV.html'));
   if (fs.existsSync(cvPdfSrc)) fs.copyFileSync(cvPdfSrc, path.join(cvDest, 'Boonyakorn_Tanrattanakorn_CV.pdf'));
 
-  // Copy site assets (CSS, media)
   const siteAssetsSrc = path.join(root, 'site', 'assets');
   if (fs.existsSync(siteAssetsSrc)) {
     copyRecursive(siteAssetsSrc, path.join(distDir, 'assets'));
@@ -176,7 +205,7 @@ async function runBuild() {
     const projectSrc = path.join(root, 'site', 'projects', slug);
     if (fs.existsSync(projectSrc)) {
       for (const file of fs.readdirSync(projectSrc)) {
-        if (!file.endsWith('.html') && !file.endsWith('.md')) {
+        if (!file.endsWith('.html') && !file.endsWith('.md') && file !== 'meta.json') {
           const fileSrc = path.join(projectSrc, file);
           const fileDest = path.join(distDir, 'projects', slug, file);
           copyRecursive(fileSrc, fileDest);
@@ -186,25 +215,21 @@ async function runBuild() {
   }
 
   // Copy website media
-  const websitesManifestPath = path.join(root, 'site', 'websites', 'websites.json');
-  if (fs.existsSync(websitesManifestPath)) {
-    const websiteIds = JSON.parse(fs.readFileSync(websitesManifestPath, 'utf8'));
-    for (const id of websiteIds) {
-      const webSrc = path.join(root, 'site', 'websites', id);
-      if (fs.existsSync(webSrc)) {
-        for (const file of fs.readdirSync(webSrc)) {
-          if (!file.endsWith('.html') && !file.endsWith('.md')) {
-            const fileSrc = path.join(webSrc, file);
-            const fileDest = path.join(distDir, 'websites', id, file);
-            copyRecursive(fileSrc, fileDest);
-          }
+  for (const id of websiteIds) {
+    const webSrc = path.join(root, 'site', 'websites', id);
+    if (fs.existsSync(webSrc)) {
+      for (const file of fs.readdirSync(webSrc)) {
+        if (!file.endsWith('.html') && !file.endsWith('.md') && file !== 'meta.json') {
+          const fileSrc = path.join(webSrc, file);
+          const fileDest = path.join(distDir, 'websites', id, file);
+          copyRecursive(fileSrc, fileDest);
         }
       }
     }
   }
 
-  // 7. Clean up SSR bundle directory
-  console.log('6. Cleaning up temporary SSR bundle...');
+  // 9. Clean up SSR bundle directory
+  console.log('8. Cleaning up temporary SSR bundle...');
   fs.rmSync(ssrDir, { recursive: true, force: true });
 
   console.log(`Build complete! Static site generated in dist/ (${allPages.length} pages rendered).`);

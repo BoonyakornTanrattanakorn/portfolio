@@ -1,0 +1,9 @@
+{
+  "title": "XSRT Hybrid Rocket Engine Test Bench",
+  "role": "Avionics & Embedded Systems Lead",
+  "date": "2026",
+  "organization": "CUHAR / XSRT",
+  "tags": ["Aerospace", "Embedded", "CAN Bus", "STM32", "Raspberry Pi"],
+  "thumbnail": "",
+  "summary": "Avionics, distributed CAN bus architecture, and ground control infrastructure for the CUHAR/XSRT hybrid rocket static fire test stand."
+}

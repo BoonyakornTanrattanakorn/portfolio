@@ -122,7 +122,7 @@ Beneath base `/portfolio/` (production) or `/` (local):
 - [x] **Step 1:** Branch `feat/react-portfolio-port` created; baseline recorded; working tree clean and baseline site untouched.
 - [x] **Step 2:** Toolchain added (package.json, Vite, React, ESLint, Vitest, scripts, clean npm ci, tests, and initial React build pass).
 - [x] **Step 3:** Static rendering and URL compatibility proved (shared page manifest, Vite client + SSR prerender, faithful static preview server tested at / and /portfolio/, 404 handling verified).
-- [ ] **Step 4:** Canonical content and pure selectors established.
+- [x] **Step 4:** Canonical content and selectors established (manifests and 11 metadata files migrated to site/content, validation suite, pure search/tag/sort selectors, date normalization, compatibility endpoints generated, 41 unit tests passing).
 - [ ] **Step 5:** Layouts, navigation, and theme handling ported.
 - [ ] **Step 6:** About and Profile ported.
 - [ ] **Step 7:** Collections ported and error handling fixed.

@@ -1,0 +1,9 @@
+{
+  "title": "Project CURSR-IV — Avionics",
+  "role": "PCB Designer & Firmware Developer",
+  "date": "2024",
+  "organization": "Chulalongkorn University High Altitude Research Club",
+  "tags": ["STM32", "KiCad", "LoRa", "PCB"],
+  "thumbnail": "",
+  "summary": "Designed a 4-layer SMT flight computer PCB, developed STM32 firmware for sensors, telemetry, and flight control."
+}
