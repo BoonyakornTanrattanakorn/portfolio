@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { build } from 'vite';
-import { MAIN_PAGES, getProjectPages } from '../site/src/pages.js';
+import { getMainPages, getProjectPages } from '../site/src/pages.js';
+import { aggregateSkills } from '../site/src/features/collections/selectors.js';
 import { normalizeBasePath, withBase } from '../site/src/utils/paths.js';
 import { escapeHtml, escapeJsonForScript } from '../site/src/utils/html.js';
 import { validateAllContent } from '../site/src/content/validate.js';
@@ -96,11 +97,14 @@ async function runBuild() {
     return { slug, ...meta };
   });
 
+  const skills = aggregateSkills(projectsList);
+  const mainPages = getMainPages({ skills, projectCount: projectsList.length });
   const projectPages = getProjectPages(projectsList);
-  const allPages = [...MAIN_PAGES, ...projectPages];
+  const allPages = [...mainPages, ...projectPages];
 
   // 6. Prerender each page
   console.log(`5. Prerendering ${allPages.length} pages...`);
+  const ogImageUrl = 'https://boonyakorntanrattanakorn.github.io/portfolio/assets/avatar.jpg';
   for (const page of allPages) {
     const { html } = renderPage({
       componentKey: page.componentKey,
@@ -123,10 +127,12 @@ async function runBuild() {
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${escapeHtml(page.title)}" />
     <meta property="og:description" content="${escapeHtml(page.description)}" />
+    <meta property="og:image" content="${ogImageUrl}" />
     <meta property="og:url" content="${pageCanonicalUrl}" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="${escapeHtml(page.title)}" />
     <meta name="twitter:description" content="${escapeHtml(page.description)}" />
+    <meta name="twitter:image" content="${ogImageUrl}" />
 
     <!-- Theme before paint -->
     <script>

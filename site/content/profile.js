@@ -17,11 +17,7 @@ export const PROFILE = {
     pdf: 'CV/Boonyakorn_Tanrattanakorn_CV.pdf',
   },
   avatar: {
-    // Local copy of profile avatar
     src: 'assets/avatar.jpg',
-    // Fallback/remote URL for reference
-    remoteSrc:
-      'https://media.licdn.com/dms/image/v2/D5603AQEQGrzVBFih9Q/profile-displayphoto-scale_400_400/B56ZuRTigjJcAk-/0/1767669377827?e=1793836800&v=beta&t=B8Ipi5LafP6Y2n9BXm6AyiV4DUIUaj1ZjJ0nEMoP5FI',
     alt: 'Boonyakorn Tanrattanakorn',
   },
   about: [

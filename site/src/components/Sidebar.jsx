@@ -33,7 +33,7 @@ export default function Sidebar({ currentNav = 'home', base = '/' }) {
         >
           <img
             className="avatar"
-            src={PROFILE.avatar.remoteSrc}
+            src={withBase(PROFILE.avatar.src, base)}
             alt={PROFILE.name}
           />
           <h1>{PROFILE.name}</h1>

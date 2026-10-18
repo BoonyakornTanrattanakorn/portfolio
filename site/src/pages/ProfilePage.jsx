@@ -1,43 +1,58 @@
 import AppLayout from '../components/AppLayout.jsx';
+import { PROFILE } from '../../content/profile.js';
+import { withBase } from '../utils/paths.js';
 
 export default function ProfilePage({ base = '/' }) {
   return (
     <AppLayout currentNav="profile" base={base}>
       <header>
+        <img
+          className="avatar"
+          src={withBase(PROFILE.avatar.src, base)}
+          alt={PROFILE.name}
+        />
         <div>
-          <h1>Boonyakorn Tanrattanakorn</h1>
-          <div className="lead">Computer Engineering — Chulalongkorn University</div>
+          <h1>{PROFILE.name}</h1>
+          <div className="lead">{PROFILE.subtitle}</div>
         </div>
       </header>
 
       <div className="body">
         <h2>About</h2>
-        <p>
-          I am an embedded firmware engineer and student focusing on STM32/ESP32 firmware, FPGA
-          design, and systems engineering. I build end-to-end prototypes and research-grade
-          projects.
-        </p>
+        <p>{PROFILE.profileAbout}</p>
 
         <h2>Contact</h2>
         <p>
-          Email: <a href="mailto:boonyakorn.tan@gmail.com">boonyakorn.tan@gmail.com</a>
+          Email: <a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
         </p>
-        <p>Location: Nonthaburi, Thailand</p>
+        <p>Location: {PROFILE.location}</p>
 
         <h2>Links</h2>
         <ul>
           <li>
-            <a href="https://github.com/BoonyakornTanrattanakorn" target="_blank" rel="noopener noreferrer">
+            <a
+              href={PROFILE.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               GitHub
             </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/boonyakorn-tanrattanakorn/" target="_blank" rel="noopener noreferrer">
+            <a
+              href={PROFILE.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               LinkedIn
             </a>
           </li>
           <li>
-            <a href={`${base}CV/Boonyakorn_Tanrattanakorn_CV.pdf`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={withBase(PROFILE.cv.pdf, base)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Download CV (PDF)
             </a>
           </li>
@@ -45,9 +60,9 @@ export default function ProfilePage({ base = '/' }) {
 
         <h2>Highlights</h2>
         <ul>
-          <li>Embedded firmware on STM32 (C/C++) and ESP32</li>
-          <li>FPGA design (Verilog) and real-time systems</li>
-          <li>PCB design, SMT assembly, and sensor integration</li>
+          {PROFILE.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
         </ul>
       </div>
     </AppLayout>

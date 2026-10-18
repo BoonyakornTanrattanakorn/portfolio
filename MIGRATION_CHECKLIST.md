@@ -124,7 +124,7 @@ Beneath base `/portfolio/` (production) or `/` (local):
 - [x] **Step 3:** Static rendering and URL compatibility proved (shared page manifest, Vite client + SSR prerender, faithful static preview server tested at / and /portfolio/, 404 handling verified).
 - [x] **Step 4:** Canonical content and selectors established (manifests and 11 metadata files migrated to site/content, validation suite, pure search/tag/sort selectors, date normalization, compatibility endpoints generated, 41 unit tests passing).
 - [x] **Step 5:** Layouts, navigation, and theme handling ported (Sidebar with navigation landmark and aria-current, AppLayout, ProjectLayout, ThemeProvider with system change listener and guarded storage, ThemeToggle with hydration-safe rendering).
-- [ ] **Step 6:** About and Profile ported.
+- [x] **Step 6:** About and Profile ported (HomePage and ProfilePage ported, build-time skills aggregation rendered directly in initial HTML without fetch waterfall or innerHTML, local avatar image stored at site/assets/avatar.jpg, stable absolute social image URLs).
 - [ ] **Step 7:** Collections ported and error handling fixed.
 - [ ] **Step 8:** Project article structure and all narratives ported.
 - [ ] **Step 9:** Interactive media integrated (3D models, lazy loading, YouTube).

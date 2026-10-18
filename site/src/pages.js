@@ -60,6 +60,18 @@ export const MAIN_PAGES = [
   },
 ];
 
+export function getMainPages({ skills = [], projectCount = 0 } = {}) {
+  return MAIN_PAGES.map((page) => {
+    if (page.id === 'home') {
+      return {
+        ...page,
+        props: { skills, projectCount },
+      };
+    }
+    return page;
+  });
+}
+
 export function getProjectPages(projectsList = []) {
   return projectsList.map((project) => {
     const slug = typeof project === 'string' ? project : project.id || project.slug;
