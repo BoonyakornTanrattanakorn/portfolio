@@ -1,176 +1,161 @@
 # Boonyakorn Tanrattanakorn — Portfolio
 
-A static portfolio website plus a CV. The site is hand-written HTML/CSS/JS with a
-JSON-driven project gallery, and the CV is written in YAML and rendered to PDF/HTML
-using [RenderCV](https://github.com/rendercv/rendercv).
+Modern, high-performance engineering portfolio built with **React 19** and **Vite**, prerendered to static HTML at build time for optimal performance, instant loading, and SEO. Includes interactive 3D model viewers (`@google/model-viewer`), responsive media embeds, accessible dark/light theme support, and an integrated CV viewer generated via [RenderCV](https://github.com/rendercv/rendercv).
 
-**Live site:** [boonyakorntanrattanakorn.github.io/portfolio](https://boonyakorntanrattanakorn.github.io/portfolio/)
+**Live Site:** [boonyakorntanrattanakorn.github.io/portfolio](https://boonyakorntanrattanakorn.github.io/portfolio/)
 
 ---
 
-## Site structure
+## Architecture & Project Structure
 
-The site is a set of static pages sharing a stylesheet, sidebar, and theme script.
+The project uses build-time static prerendering (SSG): every page is rendered to complete, accessible HTML with no hydration waterfalls, while React provides dynamic client-side filtering, sorting, theme toggling, and lazy-loaded 3D media viewers.
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Landing / about page; aggregates skills from project tags |
-| `profile.html` | Short profile / contact page |
-| `projects.html` | Project gallery (data-driven from `portfolio/`) |
-| `cv.html` | CV viewer (embeds the rendered CV) |
-| `sidebar.html` | Shared sidebar component, fetched into each page |
-| `theme.js` | Loads the sidebar and handles the dark-mode toggle |
-| `favicon.svg` | Site icon |
-| `portfolio/` | Project data, styles, and per-project pages (see below) |
-| `CV/` | CV source (`CV.yaml`) and rendered outputs (HTML/PDF) |
-
-### Portfolio data (`portfolio/`)
-
-The project gallery is driven by data, not hard-coded markup:
-
-| File | Purpose |
-|------|---------|
-| `portfolio/styles.css` | Shared stylesheet for all pages |
-| `portfolio/projects.json` | Ordered list of project slugs to display |
-| `portfolio/meta-loader.js` | Populates a project page from its `meta.json` |
-| `portfolio/projects/<slug>/` | One folder per project |
-
-Each project folder contains:
-
-- `index.html` — the project's detail page
-- `meta.json` — project metadata (title, summary, tags, etc.)
-- any images/assets (`.png`, `.gif`, `.glb`, …)
-
-`meta.json` schema:
-
-```json
-{
-  "title": "Project Title",
-  "role": "Your role on the project",
-  "date": "2024",
-  "organization": "Org or context",
-  "tags": ["tag1", "tag2"],
-  "thumbnail": "image.png",
-  "summary": "Short one-line summary."
-}
+```
+portfolio/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Pages build, test, and deploy workflow
+├── CV/
+│   ├── CV.yaml                 # RenderCV source definition
+│   ├── Boonyakorn_Tanrattanakorn_CV.html   # Committed HTML resume
+│   └── Boonyakorn_Tanrattanakorn_CV.pdf    # Committed PDF resume
+├── resume/                     # Additional tailored resume variants
+├── scripts/
+│   ├── build.js                # Production Vite + SSR prerendering script
+│   ├── preview.js              # Faithful local static HTTP preview server
+│   ├── validate-content.js     # Metadata and schema validation script
+│   └── verify-artifacts.js     # Production artifact verification script
+├── site/
+│   ├── assets/
+│   │   ├── avatar.jpg          # Profile avatar photo
+│   │   └── css/styles.css      # Core tokens, layout, and utility CSS
+│   ├── content/                # Single canonical source of truth for portfolio data
+│   │   ├── projects.json       # Ordered project slugs manifest
+│   │   ├── websites.json       # Ordered website IDs manifest
+│   │   ├── projects/           # Case study metadata (meta.json) and JSX narratives (Body.jsx)
+│   │   └── websites/           # External website listings metadata (meta.json)
+│   ├── favicon.svg             # Site icon
+│   ├── projects/               # Project media assets (images, GLB models, videos)
+│   ├── src/                    # React components, pages, context, and selectors
+│   └── websites/               # Website screenshot assets
+└── tests/                      # Automated Vitest test suite (94+ tests)
 ```
 
-`index.html`, `profile.html`, and `projects.html` read these tags to build the
-"Skills & Tools" view and the gallery, so keeping tags consistent keeps the site
-consistent.
+---
 
-### Adding a project
+## Development Commands
 
-1. Create `portfolio/projects/<your-slug>/`.
-2. Add an `index.html` (project detail page) and a `meta.json` (schema above).
-3. Add the `<your-slug>` string to `portfolio/projects.json` in the position you
-   want it to appear.
+Requires **Node.js >= 20.0.0** and **npm >= 10.0.0**.
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Starts Vite local development server with HMR. |
+| `npm run build` | Builds client assets and prerenders all 15 static HTML pages into `dist/` (defaults to base `/portfolio/`). |
+| `npm run preview` | Serves `dist/` locally over HTTP without SPA fallback (matches production GitHub Pages behavior). |
+| `npm test` | Runs the automated Vitest test suite. |
+| `npm run lint` | Runs ESLint across all JavaScript, JSX, and configuration files. |
+| `npm run validate:content` | Validates canonical JSON schemas, required fields, and referenced media existence. |
+| `npm run verify:artifacts` | Inspects `dist/` to verify all required pages, compatibility endpoints, and CV copies are present and uncorrupted. |
+| `npm run check` | Runs linting, tests, and content validation in sequence. |
 
 ---
 
-## Editing the CV
+## URL & Base Path Configuration
 
-The CV lives in [`CV/CV.yaml`](CV/CV.yaml) with three top-level keys:
+The build system cleanly supports both subpath deployments (e.g. GitHub Pages at `/portfolio/`) and root deployments (`/`):
 
-| Key | Purpose |
-|-----|---------|
-| `cv` | Personal info, sections, and all content entries |
-| `design` | Theme and visual settings (font, colors, spacing, etc.) |
-| `locale` | Language and date format strings |
+- **Default (GitHub Pages):** `npm run build` defaults to `--base /portfolio/`.
+- **Root deployment (custom domain or local preview):**
+  ```bash
+  BASE_PATH=/ npm run build
+  npm run preview -- --base /
+  ```
+- **CLI parameter override:**
+  ```bash
+  node scripts/build.js --base /my-subpath/
+  ```
 
-See the [RenderCV documentation](https://docs.rendercv.com) for the full schema and
-entry types (`ExperienceEntry`, `EducationEntry`, `PublicationEntry`, `BulletEntry`, …).
+All asset references, navigation links, and internal routes automatically adapt via the `withBase()` utility.
 
-### Rendering the CV locally
+---
 
-Requires Python 3.10+.
+## Content Management
+
+### Adding a Project
+
+1. **Place media files:** Create `site/projects/<slug>/` and add any diagrams, screenshots, or 3D models (`.glb`).
+2. **Define metadata:** Create `site/content/projects/<slug>/meta.json`:
+   ```json
+   {
+     "title": "Project Title",
+     "role": "Role / Specialization",
+     "date": "2025",
+     "organization": "Company or University",
+     "tags": ["Embedded", "C++", "STM32"],
+     "thumbnail": "thumbnail.jpg",
+     "summary": "Short 1-2 sentence description of the project."
+   }
+   ```
+3. **Write case study narrative:** Create `site/content/projects/<slug>/Body.jsx` exporting the case study content as a React component.
+4. **Register slug:** Add `"<slug>"` to `site/content/projects.json` in the desired display order.
+5. **Verify:** Run `npm run validate:content` and `npm test`.
+
+### Adding an External Website Listing
+
+1. **Place screenshot:** Create `site/websites/<id>/` and add a screenshot image.
+2. **Define metadata:** Create `site/content/websites/<id>/meta.json`:
+   ```json
+   {
+     "title": "Website Name",
+     "url": "https://example.com",
+     "role": "Full-Stack Developer",
+     "date": "2025",
+     "organization": "Personal Project",
+     "status": "live",
+     "tags": ["React", "TypeScript", "Tailwind CSS"],
+     "thumbnail": "screenshot.png",
+     "summary": "Summary of the web application."
+   }
+   ```
+3. **Register ID:** Add `"<id>"` to `site/content/websites.json`.
+4. **Verify:** Run `npm run validate:content`.
+
+---
+
+## CV & Resume Workflow
+
+The canonical CV source is defined in [`CV/CV.yaml`](CV/CV.yaml).
+
+### Regenerating the CV Locally
+
+CV rendering requires Python 3.10+ and RenderCV:
 
 ```bash
-# Create and activate a virtual environment
+# Set up Python virtual environment
 python -m venv .venv
+source .venv/bin/activate    # On Windows: .venv\Scripts\activate
 
-# Windows
-.venv\Scripts\activate
+# Install RenderCV with full font and typeset support
+pip install "rendercv[full]==2.6.*"
 
-# macOS / Linux
-source .venv/bin/activate
-
-# Install RenderCV with all optional dependencies (Typst, fonts, etc.)
-pip install "rendercv[full]"
-
-# Render — outputs are written next to the source in CV/
+# Render HTML and PDF artifacts into CV/
 rendercv render CV/CV.yaml
 ```
 
-The rendered `*.html` and `*.pdf` are committed under `CV/` and copied into the
-deploy as `Boonyakorn_Tanrattanakorn_CV.html` / `.pdf`.
+The rendered `Boonyakorn_Tanrattanakorn_CV.html` and `Boonyakorn_Tanrattanakorn_CV.pdf` files are committed to `CV/`.
+
+> **Note on CI/Deployment:** GitHub Actions does **not** install Python or execute RenderCV during CI. The deployment workflow copies and verifies the committed CV artifacts from `CV/` directly into the published production bundle.
 
 ---
 
-## Local preview
+## Deployment & CI Workflow
 
-Serve the repo root over HTTP so relative fetches (sidebar, `meta.json`, etc.) resolve:
+Continuous integration and deployment are managed via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
 
-```bash
-python -m http.server 8000
-# then open http://localhost:8000/
-```
-
----
-
-## GitHub Pages deployment
-
-Pushing changes under the watched paths to `main` triggers the workflow at
-[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which assembles a
-`_site/` directory from the static pages and committed CV outputs and deploys it to
-GitHub Pages.
-
-> Note: the workflow does **not** run RenderCV. It deploys the CV HTML/PDF already
-> committed under `CV/`, so re-render and commit those files when the CV changes.
-
-```
-Static pages + portfolio/ + committed CV/ outputs
-    │
-    ▼
-git push to main   (paths: CV/**, portfolio/**, *.html, theme.js, …)
-    │
-    ▼
-.github/workflows/deploy.yml
-    │
-    ▼
-_site/
-  ├── index.html            ← landing / about
-  ├── profile.html          ← profile / contact
-  ├── projects.html         ← project gallery
-  ├── cv.html               ← CV viewer
-  ├── sidebar.html          ← shared sidebar component
-  ├── theme.js              ← sidebar loader + dark-mode toggle
-  ├── favicon.svg
-  ├── portfolio/            ← styles, projects.json, meta-loader.js, projects/
-  └── CV/
-      ├── Boonyakorn_Tanrattanakorn_CV.html
-      └── Boonyakorn_Tanrattanakorn_CV.pdf
-    │
-    ▼
-actions/deploy-pages  →  GitHub Pages
-```
-
-### Enabling GitHub Pages (first time)
-
-1. Repository → **Settings** → **Pages**
-2. Under **Source**, select **GitHub Actions**
-3. Push any change to `main` to trigger the first deployment
-
-The workflow also supports manual runs via **Actions → Render CV and Deploy to
-GitHub Pages → Run workflow**.
-
----
-
-## Credits
-
-The CV is generated with **[RenderCV](https://github.com/rendercv/rendercv)** — an
-open-source tool that renders a YAML-defined CV into typeset PDF and HTML.
-
-- Repository: https://github.com/rendercv/rendercv
-- Documentation: https://docs.rendercv.com
-- License: MIT
+1. **`validate` job:** Runs on all pull requests and pushes to `main`.
+   - Performs clean dependency installation (`npm ci`).
+   - Runs linting (`npm run lint`), unit tests (`npm test`), and schema validation (`npm run validate:content`).
+   - Executes production build (`npm run build`) and verifies all output files and CV artifacts (`npm run verify:artifacts`).
+2. **`deploy` job:** Runs strictly on pushes to `main` (or manual `workflow_dispatch`) after the `validate` job succeeds.
+   - Uploads only the validated static `dist/` directory as a GitHub Pages artifact.
+   - Strictly keeps temporary build artifacts, source code, and node modules outside the published bundle.

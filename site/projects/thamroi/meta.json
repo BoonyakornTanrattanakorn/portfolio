@@ -1,9 +1,0 @@
-{
-  "title": "ThamRoi",
-  "role": "Full-Stack Developer",
-  "date": "2025",
-  "organization": "Academic Project",
-  "tags": ["TypeScript", "Next.js", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma", "Full-Stack"],
-  "thumbnail": "homepage.png",
-  "summary": "Full-stack matchmaking web app: group search, profiles, and admin moderation (TypeScript, Next.js, Node.js, PostgreSQL, Prisma)."
-}

@@ -1,9 +1,0 @@
-{
-  "title": "Dual-Channel Safety-Critical E-Match Ignition Module",
-  "role": "Hardware & Embedded Systems Engineer",
-  "date": "2026",
-  "organization": "CUHAR / XSRT",
-  "tags": ["KiCad", "PCB", "STM32", "C++", "CAN Bus", "SPICE", "Python", "Hardware"],
-  "thumbnail": "jlcpcb_assembled_pcb.jpg",
-  "summary": "Dual-channel rocket engine ignition module with a 3 mF capacitive discharge reservoir, relay arming isolation, digital continuity sensing, and CAN bus control for hybrid rocket static fire tests."
-}

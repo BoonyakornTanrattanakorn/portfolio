@@ -12,7 +12,9 @@
     "preview": "node scripts/preview.js",
     "lint": "eslint .",
     "test": "vitest run",
-    "validate:content": "node scripts/validate-content.js"
+    "validate:content": "node scripts/validate-content.js",
+    "verify:artifacts": "node scripts/verify-artifacts.js",
+    "check": "npm run lint && npm test && npm run validate:content"
   },
   "dependencies": {
     "@google/model-viewer": "^4.4.0",

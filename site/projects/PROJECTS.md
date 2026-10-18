@@ -1,70 +1,33 @@
-# Portfolio — project data
+# Portfolio — Project Assets & Structure
 
-This folder holds the data and assets for the project gallery. The gallery page
-itself is [`../projects.html`](../projects.html) at the repo root; it fetches the
-files here at runtime to build the cards, search, sort, and tag filters.
+This folder holds the binary and media assets (images, animations, and 3D `.glb` models) for each engineering project case study.
 
-## Contents
+## Project Media Folders
 
-- `projects.json` — ordered list of project slugs to display, e.g.
-  `["cursr-iv", "fpga-video-player", ...]`. Order controls default display order.
-- `styles.css` — shared stylesheet for every page on the site.
-- `meta-loader.js` — included by each project's `index.html`; reads that project's
-  `meta.json` and fills in the page title, meta line, tags, and thumbnail.
-- `projects/<slug>/` — one folder per project.
+Each project has a dedicated folder under `site/projects/<slug>/`:
 
-## Project folder structure
+- `site/projects/<slug>/` — image, video, and model assets (`.png`, `.jpg`, `.gif`, `.glb`).
 
-Each project lives under `projects/<slug>/` and typically contains:
+## Canonical Content Architecture
 
-- `index.html` — the project's detail page (includes `../../meta-loader.js`).
-- `meta.json` — project metadata used by both the gallery and the detail page.
-- image/asset files (`.png`, `.gif`, `.jpg`, `.glb`, …).
+Project data and narrative text have been modernized to React and centralized in `site/content/`:
 
-### `meta.json` schema
+1. **Manifest:** `site/content/projects.json` defines the ordered list of project slugs.
+2. **Metadata:** `site/content/projects/<slug>/meta.json` contains title, role, date, organization, tags, thumbnail filename, and summary.
+3. **Narrative Case Study:** `site/content/projects/<slug>/Body.jsx` provides the structured React narrative component (diagrams, tables, code listings, lazy 3D viewers).
 
-```json
-{
-  "title": "Project Title",
-  "role": "Your role on the project",
-  "date": "2024",
-  "organization": "Org or context",
-  "tags": ["tag1", "tag2"],
-  "thumbnail": "image.png",
-  "summary": "Short one-line summary."
-}
-```
+### Adding a New Project
 
-Notes:
-- `thumbnail` is a filename **relative to the project folder** (or empty for none —
-  a "No image" placeholder is shown).
-- `tags` feed both the gallery's tag filters and the home page's "Skills & Tools"
-  aggregate, so keep them consistent across projects.
-- `date` may be a full date or just a year; it is used for newest/oldest sorting.
+1. Add media files to `site/projects/<slug>/`.
+2. Create `site/content/projects/<slug>/meta.json` with the required metadata fields.
+3. Create `site/content/projects/<slug>/Body.jsx` exporting the project's case study content.
+4. Add `"<slug>"` to `site/content/projects.json` at the desired position.
+5. Validate content: `npm run validate:content`.
 
-## Adding a new project
+### GLB 3D Model Optimization
 
-1. Create `projects/<your-slug>/`.
-2. Add an `index.html` (project content) and a `meta.json` (schema above).
-3. Add `"<your-slug>"` to `projects.json` in the position you want it to appear.
-
-## Local preview
-
-Serve the **repo root** over HTTP so relative fetches resolve, then open the site:
+For 3D models (rendered via the lazy `<ModelViewer>` component), optimize `.glb` files before committing:
 
 ```bash
-python -m http.server 8000
-# then open http://localhost:8000/projects.html
-```
-
-Opening the HTML files directly via `file://` will break the `fetch()` calls for
-the sidebar and `meta.json`.
-
-## Misc — GLB model compression
-
-Optimizing `.glb` models (e.g. `projects/cursr-iv/FC.glb`) can cut file size by
-~90%:
-
-```cmd
 npx @gltf-transform/cli optimize in.glb out.glb
 ```

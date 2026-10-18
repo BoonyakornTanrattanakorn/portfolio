@@ -1,9 +1,0 @@
-{
-  "title": "Benchtop Chemical & Electrolysis Measurement Instrument",
-  "role": "Embedded Systems Engineering Intern",
-  "date": "2026",
-  "organization": "Ivory Electronics Co., Ltd.",
-  "tags": ["C++", "ESP32", "Embedded", "Sensors", "Calibration", "Data Logging", "Onshape", "3D Printing", "XeLaTeX"],
-  "thumbnail": "debugging.jpg",
-  "summary": "Benchtop lab instrument built during an 11-week internship: ESP32 firmware for conductivity/TDS, temperature and electrolysis-current measurement, with on-device UI, calibration, data logging, and a 3D-printed enclosure."
-}
