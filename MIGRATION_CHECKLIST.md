@@ -127,7 +127,38 @@ Beneath base `/portfolio/` (production) or `/` (local):
 - [x] **Step 6:** About and Profile ported (HomePage and ProfilePage ported, build-time skills aggregation rendered directly in initial HTML without fetch waterfall or innerHTML, local avatar image stored at site/assets/avatar.jpg, stable absolute social image URLs).
 - [x] **Step 7:** Collections ported and error handling fixed (shared Card, CollectionControls, CollectionGrid components, pure reactive search/tag/sort filtering, aria-pressed on filter tags, live region announcement, image error fallbacks, status badges with archived styling, separated item and collection error states that are never erased by empty results, 58 tests passing).
 - [x] **Step 8:** Project article structure and all narratives ported (all 9 project case study bodies converted to readable JSX modules in site/content/projects/, shared ProjectLayout with SVG placeholder and image error fallback, ProjectFigure component, cross-project links with base path support, preformatted code, tables, equations, initial static HTML prerendered for all 9 projects, 77 tests passing).
+- [x] **Step 9:** Interactive media integrated (lazy on-demand @google/model-viewer wrapper in ModelViewer.jsx, meshoptimizer decoder copied and self-hosted locally without external CDNs, WebGL capability check with graceful fallback, reduced-motion autoRotate suppression, responsive VideoEmbed component for FPGA demo, 85 tests passing).
 - [x] **Step 10:** CV and resume artifacts integrated (CvPage ported to React with accessible iframe title and direct HTML/PDF links, build script explicitly validates required CV artifacts and fails clearly if missing, RenderCV v2.6 generation decoupled and documented in CV/README.md, tailored resume variants in resume/ preserved, 89 tests passing).
 - [x] **Step 11:** Styles consolidated, accessibility and media performance improved (box-sizing reset, keyboard focus-visible rings in both themes, skip-to-content links in AppLayout and ProjectLayout targeting accessible main landmark with tabIndex="-1", prefers-reduced-motion media query, card thumbnail intrinsic dimensions 300x140 to prevent layout shifts, SPH GIF card thumbnail replaced with 39 KB static poster sph-poster.png reducing card payload by 99.3% while preserving full animation in project detail body, 94 tests passing).
 - [x] **Step 12:** Deployment updated and legacy frontend retired (CI workflow updated with validate and deploy jobs in .github/workflows/deploy.yml, BASE_PATH=/portfolio/ configured, artifact verification script added to package.json, superseded legacy HTML application sources removed from site/ and site/projects/, legacy JS collection/theme/meta-loader removed, redundant JSON manifests cleaned up, documentation in site/projects/PROJECTS.md, site/websites/WEBSITES.md, and root README.md rewritten for React + Vite architecture).
-- [ ] **Step 13:** Regression checks and handoff recorded.
+- [x] **Step 13:** Regression checks and handoff recorded (complete validation pass: 14 test suites with 99 tests passing, 0 ESLint errors/warnings, schema and media validation for 9 projects and 2 websites, dual base path verification for both /portfolio/ and /, artifact verification checking all 15 static HTML routes, CV documents, and compatibility JSON endpoints with zero source leaks, clean git working tree).
+
+---
+
+## 8. Final Verification Summary & Operational Status
+
+### Test Suite Execution
+- **Unit & Integration Tests:** 14 test files, 99 tests passing (`npm test`).
+  - `tests/paths.test.js`: URL base prefixing and normalization (4 tests).
+  - `tests/html.test.js`: HTML escaping and script JSON escaping (2 tests).
+  - `tests/date.test.js`: Date parsing and comparator semantics (4 tests).
+  - `tests/selectors.test.js`: Collection filtering, multi-tag OR logic, and sorting (13 tests).
+  - `tests/content-validation.test.js`: Schema, tag, status, and media reference validation (6 tests).
+  - `tests/layouts.test.jsx`: Layout landmarks, sidebar navigation, aria-current (3 tests).
+  - `tests/about-profile.test.jsx`: Skills aggregation and profile rendering (2 tests).
+  - `tests/collections.test.jsx`: Search, tags, status badges, and error handling (12 tests).
+  - `tests/project-narratives.test.jsx`: Render checks for all 9 project case studies (19 tests).
+  - `tests/interactive-media.test.jsx`: Model-viewer lazy wrapper, WebGL fallbacks, VideoEmbed (8 tests).
+  - `tests/cv.test.jsx`: CV viewer and document links (4 tests).
+  - `tests/styles-accessibility.test.jsx`: Skip links, focus visibility, reduced motion, CLS prevention (5 tests).
+  - `tests/preview.test.js`: Static HTTP preview server behavior, URL forms, 404 handling (12 tests).
+  - `tests/regression-verification.test.js`: Prerendered HTML inspection across all 15 routes, compatibility endpoints, and asset verification (5 tests).
+- **Linter:** ESLint clean (0 errors, 0 warnings across all source, test, and config files).
+- **Content Validation:** 9 projects and 2 websites verified against schemas and filesystem media (`npm run validate:content`).
+- **Production Build:** Vite client bundle + SSR prerender successfully generates all 15 static HTML pages (`npm run build`).
+- **Artifact Verification:** All 15 static pages, 11 compatibility endpoints, CV HTML/PDF, favicon, avatar, and assets confirmed in `dist/` with zero source leaks (`npm run verify:artifacts`).
+
+### Material Limitations & Verification Notes
+- **Interactive WebGL & Video Playback:** Live WebGL canvas rendering for 3D `.glb` models (`@google/model-viewer`) and embedded YouTube playback require browser execution with GPU/network access; programmatic verification confirms proper lazy loading, script bundling, WebGL capability checks, reduced-motion behavior, and accessible fallbacks.
+- **RenderCV Decoupling:** RenderCV (Python 3.10+) execution remains decoupled from the web application build. CI deployment verifies and packages the committed HTML and PDF artifacts directly, preventing fragile CI Python dependencies.
+
