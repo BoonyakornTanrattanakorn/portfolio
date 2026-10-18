@@ -8,6 +8,7 @@ coverage/
 !README.md
 !GEMINI_REACT_PORT_PLAN.md
 !MIGRATION_CHECKLIST.md
+!CV/README.md
 
 *.acn
 *.acr

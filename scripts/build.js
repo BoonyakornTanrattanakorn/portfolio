@@ -208,9 +208,15 @@ async function runBuild() {
   const cvDest = path.join(distDir, 'CV');
   fs.mkdirSync(cvDest, { recursive: true });
   const cvHtmlSrc = path.join(root, 'CV', 'Boonyakorn_Tanrattanakorn_CV.html');
+  if (!fs.existsSync(cvHtmlSrc)) {
+    throw new Error(`Required CV HTML artifact missing at: ${cvHtmlSrc}`);
+  }
   const cvPdfSrc = path.join(root, 'CV', 'Boonyakorn_Tanrattanakorn_CV.pdf');
-  if (fs.existsSync(cvHtmlSrc)) fs.copyFileSync(cvHtmlSrc, path.join(cvDest, 'Boonyakorn_Tanrattanakorn_CV.html'));
-  if (fs.existsSync(cvPdfSrc)) fs.copyFileSync(cvPdfSrc, path.join(cvDest, 'Boonyakorn_Tanrattanakorn_CV.pdf'));
+  if (!fs.existsSync(cvPdfSrc)) {
+    throw new Error(`Required CV PDF artifact missing at: ${cvPdfSrc}`);
+  }
+  fs.copyFileSync(cvHtmlSrc, path.join(cvDest, 'Boonyakorn_Tanrattanakorn_CV.html'));
+  fs.copyFileSync(cvPdfSrc, path.join(cvDest, 'Boonyakorn_Tanrattanakorn_CV.pdf'));
 
   const siteAssetsSrc = path.join(root, 'site', 'assets');
   if (fs.existsSync(siteAssetsSrc)) {
