@@ -11,11 +11,16 @@ This directory contains the canonical RenderCV source and generated documents fo
 RenderCV generation is decoupled from the web application build. To regenerate the document artifacts:
 
 ```bash
-# Requires RenderCV 2.6 (compatible with schema v2.6)
-pip install "rendercv==2.6.*"
+# Requires RenderCV (compatible with schema v2.6)
+pip install "rendercv"
 
-# Run rendering from this directory or repository root
+# On Windows PowerShell, ensure UTF-8 console output is enabled:
+$env:PYTHONUTF8 = 1
+
+# Run rendering from this directory:
 rendercv render CV.yaml
+# Or via python module:
+python -m rendercv render CV.yaml
 ```
 
 ## Generated Outputs
