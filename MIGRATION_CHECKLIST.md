@@ -120,7 +120,7 @@ Beneath base `/portfolio/` (production) or `/` (local):
 
 ## 7. Migration Step Verification Log
 - [x] **Step 1:** Branch `feat/react-portfolio-port` created; baseline recorded; working tree clean and baseline site untouched.
-- [ ] **Step 2:** Toolchain added (package.json, Vite, React, ESLint, Vitest, scripts).
+- [x] **Step 2:** Toolchain added (package.json, Vite, React, ESLint, Vitest, scripts, clean npm ci, tests, and initial React build pass).
 - [ ] **Step 3:** Static rendering and URL compatibility proved.
 - [ ] **Step 4:** Canonical content and pure selectors established.
 - [ ] **Step 5:** Layouts, navigation, and theme handling ported.

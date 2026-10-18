@@ -224,7 +224,7 @@ Finish by reporting the branch name, the ordered commits, the verification resul
 ## Progress
 
 - [x] Step 1 — Branch and baseline
-- [ ] Step 2 — Toolchain
+- [x] Step 2 — Toolchain
 - [ ] Step 3 — Static rendering and URL compatibility
 - [ ] Step 4 — Canonical content and selectors
 - [ ] Step 5 — Layouts, navigation, and theme

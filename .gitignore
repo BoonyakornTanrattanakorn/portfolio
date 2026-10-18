@@ -1,4 +1,8 @@
 /.venv
+node_modules/
+dist/
+coverage/
+.vite/
 *.md
 *.typ
 !README.md
