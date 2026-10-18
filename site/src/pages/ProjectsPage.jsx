@@ -1,14 +1,16 @@
+import AppLayout from '../components/AppLayout.jsx';
+
 export default function ProjectsPage({ base = '/' }) {
   return (
-    <div className="page projects-page">
-      <h1>Portfolio</h1>
-      <p className="lead">Selected projects and highlights.</p>
-      <nav>
-        <a href={`${base}index.html`}>Home</a>
-      </nav>
+    <AppLayout currentNav="projects" base={base}>
       <section>
-        <p>Project collection will load here.</p>
+        <h1 style={{ margin: '8px 0 4px' }}>Portfolio</h1>
+        <p className="lead">Selected projects and highlights. Click a card to read more.</p>
       </section>
-    </div>
+
+      <section className="grid" id="project-grid">
+        <p className="loading">Loading projects…</p>
+      </section>
+    </AppLayout>
   );
 }

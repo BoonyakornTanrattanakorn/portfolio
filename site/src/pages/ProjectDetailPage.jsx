@@ -1,16 +1,28 @@
-export default function ProjectDetailPage({ slug, title, summary, base = '/' }) {
+import ProjectLayout from '../components/ProjectLayout.jsx';
+
+export default function ProjectDetailPage({
+  slug,
+  title,
+  summary,
+  date,
+  organization,
+  role,
+  tags = [],
+  thumbnail,
+  base = '/',
+}) {
   return (
-    <article className="project-detail">
-      <nav>
-        <a href={`${base}projects.html`}>← Back to Portfolio</a>
-      </nav>
-      <header>
-        <h1>{title || slug}</h1>
-        {summary && <p className="lead">{summary}</p>}
-      </header>
-      <section className="body">
-        <p>Project details for {slug}. Full narrative will be populated.</p>
-      </section>
-    </article>
+    <ProjectLayout
+      title={title || slug}
+      summary={summary}
+      date={date}
+      organization={organization}
+      role={role}
+      tags={tags}
+      thumbnail={thumbnail}
+      base={base}
+    >
+      <p>Project details for {slug}. Full narrative will be populated.</p>
+    </ProjectLayout>
   );
 }

@@ -65,6 +65,11 @@ export function getProjectPages(projectsList = []) {
     const slug = typeof project === 'string' ? project : project.id || project.slug;
     const title = project.title || slug;
     const summary = project.summary || '';
+    const date = project.date || '';
+    const organization = project.organization || '';
+    const role = project.role || '';
+    const tags = Array.isArray(project.tags) ? project.tags : [];
+    const thumbnail = project.thumbnail || '';
     return {
       id: `project:${slug}`,
       outputPath: `projects/${slug}/index.html`,
@@ -75,6 +80,11 @@ export function getProjectPages(projectsList = []) {
         slug,
         title,
         summary,
+        date,
+        organization,
+        role,
+        tags,
+        thumbnail,
       },
     };
   });

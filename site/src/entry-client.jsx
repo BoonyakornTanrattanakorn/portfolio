@@ -1,5 +1,6 @@
 import { hydrateRoot, createRoot } from 'react-dom/client';
 import App from './App.jsx';
+import '../assets/css/styles.css';
 
 function getInitialData() {
   const script = document.getElementById('__PORTFOLIO_DATA__');

@@ -227,7 +227,7 @@ Finish by reporting the branch name, the ordered commits, the verification resul
 - [x] Step 2 — Toolchain
 - [x] Step 3 — Static rendering and URL compatibility
 - [x] Step 4 — Canonical content and selectors
-- [ ] Step 5 — Layouts, navigation, and theme
+- [x] Step 5 — Layouts, navigation, and theme
 - [ ] Step 6 — About and Profile
 - [ ] Step 7 — Collections and error handling
 - [ ] Step 8 — All project narratives
